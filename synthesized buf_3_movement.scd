@@ -128,8 +128,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[0.1])),EnvGen.ar(Env(~el1,[0.1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[0.1])),EnvGen.ar(Env(~el2,[0.1]))));
 
 
 	}
@@ -165,8 +165,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[0.1])),EnvGen.ar(Env(~el1,[0.1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[0.1])),EnvGen.ar(Env(~el2,[0.1]))));
 
 
 	}
@@ -202,8 +202,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[0.1])),EnvGen.ar(Env(~el1,[0.1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[0.1])),EnvGen.ar(Env(~el2,[0.1]))));
 
 
 	}
@@ -239,8 +239,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[0.1])),EnvGen.ar(Env(~el1,[0.1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[0.1])),EnvGen.ar(Env(~el2,[0.1]))));
 
 
 	}
@@ -276,8 +276,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[0.1])),EnvGen.ar(Env(~el1,[0.1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[0.1])),EnvGen.ar(Env(~el2,[0.1]))));
 
 
 	}
@@ -313,8 +313,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[0.1])),EnvGen.ar(Env(~el1,[0.1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[0.1])),EnvGen.ar(Env(~el2,[0.1]))));
 
 
 	}
@@ -350,8 +350,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[0.1])),EnvGen.ar(Env(~el1,[0.1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[0.1])),EnvGen.ar(Env(~el2,[0.1]))));
 
 
 	}
@@ -387,8 +387,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[0.1])),EnvGen.ar(Env(~el1,[0.1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[0.1])),EnvGen.ar(Env(~el2,[0.1]))));
 
 
 	}
