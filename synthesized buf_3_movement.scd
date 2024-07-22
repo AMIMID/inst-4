@@ -24,8 +24,8 @@ Buffer.freeAll
 )
 
 (
-~c1 = Buffer.readChannel(s,,channels:0 );
-~c2 = Buffer.readChannel(s,,channels:1 );
+~c1 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/SC_240722_172118.wav",channels:0 );
+~c2 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/SC_240722_172118.wav",channels:1 );
 ~c3 = Buffer.readChannel(s,,channels:0 );
 ~c4 = Buffer.readChannel(s,,channels:1 );
 ~c5 = Buffer.readChannel(s,,channels:0 );
@@ -95,10 +95,12 @@ v3=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
 );
 
+
+
 (
 (
 SynthDef.new(\o1, {
-    var in1,in2, chainx,chainy,b=0,az1,az2,el1,el2;
+    var in1,in2, chainx,chainy,b=0,az1=0,az2=0,el1=0,el2=0;
 	var chainxx,chainyy,pl=0;
 
     in1 = PlayBuf.ar(1, ~c1.bufnum, BufRateScale.kr(~c1), loop: 0, doneAction:2);
@@ -109,10 +111,15 @@ SynthDef.new(\o1, {
 
    250.do{
 
-az1=~az.[pl];
-el1=~el.[pl];
-az2=~az.reverse.[pl];
-el2=~el.reverse.[pl];
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
+
+		~az1=250.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el1=250.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+		~az2=250.collect{az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el2=250.collect{el2=(el2+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 pl=pl+1;
 
@@ -121,8 +128,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,az1,el1));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,az2,el2));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
 
 
 	}
@@ -141,10 +148,15 @@ SynthDef.new(\o2, {
 
    250.do{
 
-az1=(~az.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el1=(~el.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
-az2=(~az.reverse.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el2=(~el.reverse.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
+
+		~az1=250.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el1=250.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+		~az2=250.collect{az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el2=250.collect{el2=(el2+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 pl=pl+1;
 
@@ -153,8 +165,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,az1,el1));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,az2,el2));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
 
 
 	}
@@ -173,10 +185,15 @@ SynthDef.new(\o3, {
 
    250.do{
 
-az1=(~az.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el1=(~el.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
-az2=(~az.reverse.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el2=(~el.reverse.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
+
+		~az1=250.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el1=250.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+		~az2=250.collect{az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el2=250.collect{el2=(el2+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 pl=pl+1;
 
@@ -185,8 +202,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,az1,el1));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,az2,el2));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
 
 
 	}
@@ -205,10 +222,15 @@ SynthDef.new(\o4, {
 
    250.do{
 
-az1=(~az.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el1=(~el.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
-az2=(~az.reverse.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el2=(~el.reverse.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
+
+		~az1=250.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el1=250.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+		~az2=250.collect{az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el2=250.collect{el2=(el2+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 pl=pl+1;
 
@@ -217,8 +239,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,az1,el1));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,az2,el2));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
 
 
 	}
@@ -237,10 +259,15 @@ SynthDef.new(\o5, {
 
    250.do{
 
-az1=(~az.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el1=(~el.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
-az2=(~az.reverse.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el2=(~el.reverse.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
+
+		~az1=250.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el1=250.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+		~az2=250.collect{az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el2=250.collect{el2=(el2+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 pl=pl+1;
 
@@ -249,8 +276,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,az1,el1));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,az2,el2));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
 
 
 	}
@@ -269,10 +296,15 @@ SynthDef.new(\o6, {
 
    250.do{
 
-az1=(~az.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el1=(~el.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
-az2=(~az.reverse.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el2=(~el.reverse.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
+
+		~az1=250.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el1=250.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+		~az2=250.collect{az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el2=250.collect{el2=(el2+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 pl=pl+1;
 
@@ -281,8 +313,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,az1,el1));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,az2,el2));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
 
 
 	}
@@ -301,10 +333,15 @@ SynthDef.new(\o7, {
 
    250.do{
 
-az1=(~az.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el1=(~el.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
-az2=(~az.reverse.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el2=(~el.reverse.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
+
+		~az1=250.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el1=250.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+		~az2=250.collect{az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el2=250.collect{el2=(el2+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 pl=pl+1;
 
@@ -313,8 +350,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,az1,el1));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,az2,el2));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
 
 
 	}
@@ -323,7 +360,7 @@ pl=pl+1;
 (
 SynthDef.new(\o8, {
     var in1,in2, chainx,chainy,b=0,az1,az2,el1,el2;
-	var chainxx,chainyy,pl=0;
+	var chainxx,chainyy,pl=0,;
 
     in1 = PlayBuf.ar(1, ~c15.bufnum, BufRateScale.kr(~c15), loop: 0, doneAction:2);
 	 in2 = PlayBuf.ar(1, ~c16.bufnum, BufRateScale.kr(~c16), loop: 0, doneAction:2);
@@ -333,10 +370,15 @@ SynthDef.new(\o8, {
 
    250.do{
 
-az1=(~az.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el1=(~el.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
-az2=(~az.reverse.[pl]+(360-(360/1.6180339887499))).wrap(180.neg,180);
-el2=(~el.reverse.[pl]+(360-(360/1.6180339887499))).wrap(90.neg,90);
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
+
+		~az1=250.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el1=250.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+		~az2=250.collect{az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+		~el2=250.collect{el2=(el2+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 pl=pl+1;
 
@@ -345,8 +387,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,az1,el1));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,az2,el2));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env([1],[~az1])),EnvGen.ar(Env([1],[~el1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env([1],[~az2])),EnvGen.ar(Env([1],[~el2]))));
 
 
 	}

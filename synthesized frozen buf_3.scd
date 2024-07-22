@@ -226,7 +226,7 @@ r=[0,0,1].normalizeSum;
 v2=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 v3=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
-~az = 100.collect{
+~az = 250.collect{
 
 		az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180);
 
@@ -247,7 +247,7 @@ v3=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
 	};
 
-~el = 100.collect{
+~el = 250.collect{
 
 		az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180);
 
@@ -275,7 +275,7 @@ var rad1=0,rad2=0,rad3=0;
 var n1,n2,n3,m=4;
 
 
-~phase2 = 100.collect{
+~phase2 = 250.collect{
 		angle1=(angle1+(360-(360/1.6180339887499))).wrap(180.neg,180);
 	   angle2=(angle2+(360-(360/1.6180339887499))).wrap(90.neg,90);
 	rad1=(rad1+(360-(360/1.6180339887499))).wrap(1.neg,1);
@@ -284,7 +284,7 @@ var n1,n2,n3,m=4;
 
 	};
 
-~phase3 = 100.collect{
+~phase3 = 250.collect{
 		angle3=(angle3+(360-(360/1.6180339887499))).wrap(180.neg,180);
 	   angle4=(angle4+(360-(360/1.6180339887499))).wrap(90.neg,90);
 	rad2=(rad2+(360-(360/1.6180339887499))).wrap(1.neg,1);
@@ -293,7 +293,7 @@ var n1,n2,n3,m=4;
 
 	};
 
-~phase4 = 100.collect{
+~phase4 = 250.collect{
 		angle5=(angle5+(360-(360/1.6180339887499))).wrap(180.neg,180);
 	   angle6=(angle6+(360-(360/1.6180339887499))).wrap(90.neg,90);
 	rad3=(rad3+(360-(360/1.6180339887499))).wrap(1.neg,1);
@@ -309,7 +309,7 @@ var rad1=0,rad2=0,rad3=0;
 var n1,n2,n3,m=12;
 
 
-~n2 = 100.collect{
+~n2 = 250.collect{
 		angle1=(angle1+(360-(360/1.6180339887499))).wrap(180.neg,180);
 	   angle2=(angle2+(360-(360/1.6180339887499))).wrap(90.neg,90);
 	rad1=(rad1+(360-(360/1.6180339887499))).wrap(1.neg,1);
@@ -318,7 +318,7 @@ var n1,n2,n3,m=12;
 
 	};
 
-~n3 = 100.collect{
+~n3 = 250.collect{
 		angle3=(angle3+(360-(360/1.6180339887499))).wrap(180.neg,180);
 	   angle4=(angle4+(360-(360/1.6180339887499))).wrap(90.neg,90);
 	rad2=(rad2+(360-(360/1.6180339887499))).wrap(1.neg,1);
@@ -327,7 +327,7 @@ var n1,n2,n3,m=12;
 
 	};
 
-~n4 = 100.collect{
+~n4 = 250.collect{
 		angle5=(angle5+(360-(360/1.6180339887499))).wrap(180.neg,180);
 	   angle6=(angle6+(360-(360/1.6180339887499))).wrap(90.neg,90);
 	rad3=(rad3+(360-(360/1.6180339887499))).wrap(1.neg,1);
