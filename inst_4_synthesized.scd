@@ -28,7 +28,7 @@ Buffer.freeAll
 (
 SynthDef.new(\ob, {
 arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0,el2=0,az3=0,el3=0,ph1,ph2,ph3,mag1,mag2,mag3;
-	var freq, env1,m=1,bank, pitch, fund, angle=0,ang;
+	var freq, env1,m=1,bank, pitch, fund, angle=0,ang,azz,ell;
 	var osc1_x,osc1_y,osx1_z,phx,phy,angle1=90;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -60,8 +60,11 @@ ang=angle;
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
-~azim=16.collect{az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180)};
-~elev=16.collect{el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+azz=az;
+ell=el;
+
+~azim=16.collect{azz=(azz+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+~elev=16.collect{ell=(ell+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
@@ -84,7 +87,7 @@ m=m+1;
 (
 SynthDef.new(\oc, {
 arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0,el2=0,az3=0,el3=0,ph1,ph2,ph3,mag1,mag2,mag3;
-	var freq, env1,m=1,bank, pitch, fund, angle=0,ang;
+	var freq, env1,m=1,bank, pitch, fund, angle=0,ang,azz,ell;
 	var osc1_x,osc1_y,osx1_z,phx,phy,angle1=90;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -116,8 +119,11 @@ ang=angle;
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
-~azim=16.collect{az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180)};
-~elev=16.collect{el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+azz=az;
+ell=el;
+
+~azim=16.collect{azz=(azz+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+~elev=16.collect{ell=(ell+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
@@ -140,7 +146,7 @@ m=m+1;
 (
 SynthDef.new(\od, {
 arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0,el2=0,az3=0,el3=0,ph1,ph2,ph3,mag1,mag2,mag3;
-	var freq, env1,m=1,bank, pitch, fund, angle=0,ang;
+	var freq, env1,m=1,bank, pitch, fund, angle=0,ang,azz,ell;
 	var osc1_x,osc1_y,osx1_z,phx,phy,angle1=90;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -172,8 +178,11 @@ ang=angle;
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
-~azim=16.collect{az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180)};
-~elev=16.collect{el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90)};
+azz=az;
+ell=el;
+
+~azim=16.collect{azz=(azz+(360-(360/1.6180339887499))).wrap(180.neg,180)};
+~elev=16.collect{ell=(ell+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
