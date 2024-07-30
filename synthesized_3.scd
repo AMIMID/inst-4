@@ -45,6 +45,8 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,dist=0.1.az1=0,el1=0;
 	freq = (fund*12)*pitch;
 
 	bank.do{
+angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
+
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
@@ -92,6 +94,8 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,dist=0.1;
 	freq = (fund*12)*pitch;
 
 	bank.do{
+
+		angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
@@ -136,6 +140,7 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,dist=0.1;
 	freq = (fund*12)*pitch;
 
 	bank.do{
+		angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
