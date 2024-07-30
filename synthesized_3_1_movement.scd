@@ -45,6 +45,12 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1;
 	freq = (fund*12)*pitch;
 
 	bank.do{
+angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
+//angle1=(angle1+(360-(360/1.6180339887499))).wrap(0,360);
+
+~angle=100.collect{angle=(angle+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;};
+//~angel1=16.collect{angle1=(angle1+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;}
+
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
@@ -57,13 +63,10 @@ el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 //~azim1=16.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
 //~elev1=16.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
-    phx=exp(Complex(0,1)*(angle.degrad)).phase;
-		// phy=exp(Complex(0,1)*(angle.degrad)).phase;
-
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
 
-osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:SinOsc.ar(0.1,phx,2pi)),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
+osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:EnvGen.ar(Env(~angle,[0.1]))),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
 
 //osc1_y=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:SinOsc.ar(0.1,phy,2pi)),~b.bufnum,EnvGen.ar(Env(~azim1,[1/2])),EnvGen.ar(Env(~elev1,[1/2])));
 
@@ -98,6 +101,12 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1;
 	freq = (fund*12)*pitch;
 
 	bank.do{
+angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
+//angle1=(angle1+(360-(360/1.6180339887499))).wrap(0,360);
+
+~angle=100.collect{angle=(angle+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;};
+//~angel1=16.collect{angle1=(angle1+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;}
+
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
@@ -110,13 +119,10 @@ el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 //~azim1=16.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
 //~elev1=16.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
-    phx=exp(Complex(0,1)*(angle.degrad)).phase;
-		// phy=exp(Complex(0,1)*(angle.degrad)).phase;
-
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
 
-osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:SinOsc.ar(0.1,phx,2pi)),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
+osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:EnvGen.ar(Env(~angle,[0.1]))),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
 
 //osc1_y=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:SinOsc.ar(0.1,phy,2pi)),~b.bufnum,EnvGen.ar(Env(~azim1,[1/2])),EnvGen.ar(Env(~elev1,[1/2])));
 
@@ -151,6 +157,12 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1;
 	freq = (fund*12)*pitch;
 
 	bank.do{
+angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
+//angle1=(angle1+(360-(360/1.6180339887499))).wrap(0,360);
+
+~angle=100.collect{angle=(angle+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;};
+//~angel1=16.collect{angle1=(angle1+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;}
+
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
 el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
@@ -163,13 +175,10 @@ el=(el+(360-(360/1.6180339887499))).wrap(90.neg,90);
 //~azim1=16.collect{az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180)};
 //~elev1=16.collect{el1=(el1+(360-(360/1.6180339887499))).wrap(90.neg,90)};
 
-    phx=exp(Complex(0,1)*(angle.degrad)).phase;
-		// phy=exp(Complex(0,1)*(angle.degrad)).phase;
-
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
 
-osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:SinOsc.ar(0.1,phx,2pi)),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
+osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:EnvGen.ar(Env(~angle,[0.1]))),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
 
 //osc1_y=VBAP.ar(4,SinOsc.ar((freq*m),mul:m.reciprocal,phase:SinOsc.ar(0.1,phy,2pi)),~b.bufnum,EnvGen.ar(Env(~azim1,[1/2])),EnvGen.ar(Env(~elev1,[1/2])));
 
