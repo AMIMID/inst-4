@@ -128,8 +128,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[1])),EnvGen.ar(Env(~el1,[1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[1])),EnvGen.ar(Env(~el2,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env.circle(~az1,[1])),EnvGen.ar(Env.circle(~el1,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env.circle(~az2,[1])),EnvGen.ar(Env.circle(~el2,[1]))));
 
 
 	}
@@ -165,8 +165,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[1])),EnvGen.ar(Env(~el1,[1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[1])),EnvGen.ar(Env(~el2,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env.circle(~az1,[1])),EnvGen.ar(Env.circle(~el1,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env.circle(~az2,[1])),EnvGen.ar(Env.circle(~el2,[1]))));
 
 
 	}
@@ -202,8 +202,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[1])),EnvGen.ar(Env(~el1,[1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[1])),EnvGen.ar(Env(~el2,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env.circle(~az1,[1])),EnvGen.ar(Env.circle(~el1,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env.circle(~az2,[1])),EnvGen.ar(Env.circle(~el2,[1]))));
 
 
 	}
@@ -239,8 +239,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[1])),EnvGen.ar(Env(~el1,[1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[1])),EnvGen.ar(Env(~el2,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env.circle(~az1,[1])),EnvGen.ar(Env.circle(~el1,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env.circle(~az2,[1])),EnvGen.ar(Env.circle(~el2,[1]))));
 
 
 	}
@@ -276,8 +276,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[1])),EnvGen.ar(Env(~el1,[1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[1])),EnvGen.ar(Env(~el2,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env.circle(~az1,[1])),EnvGen.ar(Env.circle(~el1,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env.circle(~az2,[1])),EnvGen.ar(Env.circle(~el2,[1]))));
 
 
 	}
@@ -313,8 +313,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[1])),EnvGen.ar(Env(~el1,[1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[1])),EnvGen.ar(Env(~el2,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env.circle(~az1,[1])),EnvGen.ar(Env.circle(~el1,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env.circle(~az2,[1])),EnvGen.ar(Env.circle(~el2,[1]))));
 
 
 	}
@@ -350,8 +350,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[1])),EnvGen.ar(Env(~el1,[1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[1])),EnvGen.ar(Env(~el2,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env.circle(~az1,[1])),EnvGen.ar(Env.circle(~el1,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env.circle(~az2,[1])),EnvGen.ar(Env.circle(~el2,[1]))));
 
 
 	}
@@ -387,8 +387,8 @@ pl=pl+1;
 
 	b=b+1;
 
-		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env(~az1,[1])),EnvGen.ar(Env(~el1,[1]))));
-		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env(~az2,[1])),EnvGen.ar(Env(~el2,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,EnvGen.ar(Env.circle(~az1,[1])),EnvGen.ar(Env.circle(~el1,[1]))));
+		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,EnvGen.ar(Env.circle(~az2,[1])),EnvGen.ar(Env.circle(~el2,[1]))));
 
 
 	}
