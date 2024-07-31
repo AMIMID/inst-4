@@ -28,8 +28,8 @@ Buffer.freeAll
 (
 SynthDef.new(\ob, {
 arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0,el2=0,az3=0,el3=0,ph1,ph2,ph3,mag1,mag2,mag3;
-	var freq, env1,m=1,bank, pitch, fund, angle=0,ang,azz,ell;
-	var osc1_x,osc1_y,osx1_z,phx,phy,angle1=90;
+	var freq, env1,m=1,bank, pitch, fund, angle=0,angle1=0,ang,ang1,azz,ell;
+	var osc1_x,osc1_y,osx1_z,phx,phy;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
@@ -49,12 +49,13 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0
 
 	bank.do{
 angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
-//angle1=(angle1+(360-(360/1.6180339887499))).wrap(0,360);
+angle1=(angle1+(1-(1/1.6180339887499))).wrap(0,1);
 
 ang=angle;
+ang1=angle1;
 
 ~angle=100.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,360);phx=exp(Complex(0,1)*(ang.degrad)).phase;};
-~mag=100.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,1);};
+~mag=100.collect{ang1=(ang1+(360-(360/1.6180339887499))).wrap(0,360);};
 //~angel1=16.collect{angle1=(angle1+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;}
 
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
@@ -69,7 +70,8 @@ ell=el;
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
 
-osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:EnvGen.ar(Env(~mag.scramble,~mag.scramble),levelScale:m.reciprocal),phase:EnvGen.ar(Env(~angle,~mag.scramble))),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
+osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:EnvGen.ar(Env(~mag.normalize.scramble,[1/2]),levelScale:m.reciprocal),phase:EnvGen.ar(Env(~angle,[1/2]))),
+			~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
 
 m=m+1;
 
@@ -87,8 +89,8 @@ m=m+1;
 (
 SynthDef.new(\oc, {
 arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0,el2=0,az3=0,el3=0,ph1,ph2,ph3,mag1,mag2,mag3;
-	var freq, env1,m=1,bank, pitch, fund, angle=0,ang,azz,ell;
-	var osc1_x,osc1_y,osx1_z,phx,phy,angle1=90;
+	var freq, env1,m=1,bank, pitch, fund, angle=0,angle1=0,ang,ang1,azz,ell;
+	var osc1_x,osc1_y,osx1_z,phx,phy;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
@@ -108,12 +110,13 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0
 
 	bank.do{
 angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
-//angle1=(angle1+(360-(360/1.6180339887499))).wrap(0,360);
+angle1=(angle1+(1-(1/1.6180339887499))).wrap(0,1);
 
 ang=angle;
+ang1=angle1;
 
 ~angle=100.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,360);phx=exp(Complex(0,1)*(ang.degrad)).phase;};
-~mag=100.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,1);};
+~mag=100.collect{ang1=(ang1+(360-(360/1.6180339887499))).wrap(0,360);};
 //~angel1=16.collect{angle1=(angle1+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;}
 
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
@@ -128,7 +131,8 @@ ell=el;
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
 
-osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:EnvGen.ar(Env(~mag.scramble,~mag.scramble),levelScale:m.reciprocal),phase:EnvGen.ar(Env(~angle,~mag.scramble))),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
+osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:EnvGen.ar(Env(~mag.normalize.scramble,[1/2]),levelScale:m.reciprocal),phase:EnvGen.ar(Env(~angle,[1/2]))),
+			~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
 
 m=m+1;
 
@@ -146,8 +150,8 @@ m=m+1;
 (
 SynthDef.new(\od, {
 arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0,el2=0,az3=0,el3=0,ph1,ph2,ph3,mag1,mag2,mag3;
-	var freq, env1,m=1,bank, pitch, fund, angle=0,ang,azz,ell;
-	var osc1_x,osc1_y,osx1_z,phx,phy,angle1=90;
+	var freq, env1,m=1,bank, pitch, fund, angle=0,angle1=0,ang,ang1,azz,ell;
+	var osc1_x,osc1_y,osx1_z,phx,phy;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
@@ -167,12 +171,13 @@ arg  n1=1, cutt=440,decay=6,t=2,attack=0.05,az=0,el=0,az1=0,el1=0,dist=0.1,az2=0
 
 	bank.do{
 angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
-//angle1=(angle1+(360-(360/1.6180339887499))).wrap(0,360);
+angle1=(angle1+(1-(1/1.6180339887499))).wrap(0,1);
 
 ang=angle;
+ang1=angle1;
 
 ~angle=100.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,360);phx=exp(Complex(0,1)*(ang.degrad)).phase;};
-~mag=100.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,1);};
+~mag=100.collect{ang1=(ang1+(360-(360/1.6180339887499))).wrap(0,360);};
 //~angel1=16.collect{angle1=(angle1+(360-(360/1.6180339887499))).wrap(0.neg,360);phx=exp(Complex(0,1)*(angle.degrad)).phase;}
 
 az=(az+(360-(360/1.6180339887499))).wrap(180.neg,180);
@@ -187,7 +192,8 @@ ell=el;
 env1=EnvGen.ar(Env.perc(attack,decay,pitch.reciprocal),doneAction:2,levelScale:dist);
 
 
-osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:EnvGen.ar(Env(~mag.scramble,~mag.scramble),levelScale:m.reciprocal),phase:EnvGen.ar(Env(~angle,~mag.scramble))),~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
+osc1_x=VBAP.ar(4,SinOsc.ar((freq*m),mul:EnvGen.ar(Env(~mag.normalize.scramble,[1/2]),levelScale:m.reciprocal),phase:EnvGen.ar(Env(~angle,[1/2]))),
+			~b.bufnum,EnvGen.ar(Env(~azim,[1/2])),EnvGen.ar(Env(~elev,[1/2])));
 
 m=m+1;
 

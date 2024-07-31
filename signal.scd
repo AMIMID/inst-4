@@ -27,17 +27,17 @@ var angle=0,m=1,ph,mag=0,ang,amp,angle1=90,ang1,ph1,mag1=90,amp1,mg;
 
 	mag=(mag+(360-(360/1.6180339887499))).wrap(0,360);
 	amp=mag;
-~mag=1000.collect{amp=(amp+(360-(360/1.6180339887499))).wrap(0,1)};
+~mag=1000.collect{amp=(amp+(360-(360/1.6180339887499))).wrap(0,360)};
 
 	mag1=(mag1+(360-(360/1.6180339887499))).wrap(0,360);
 	amp1=mag1;
-~mag1=1000.collect{amp1=(amp1+(360-(360/1.6180339887499))).wrap(0,1)};
+~mag1=1000.collect{amp1=(amp1+(360-(360/1.6180339887499))).wrap(0,360)};
 
 		mg=mag;
-~m=999.collect{mg=(mg+(360-(360/1.6180339887499))).wrap(0,1)};
+~m=999.collect{mg=(mg+(360-(360/1.6180339887499))).wrap(0,360)};
 
-		Out.ar(0,SinOsc.ar(55*m,EnvGen.ar(Env(~angle.scramble,~m)),EnvGen.ar(Env(~mag.scramble,~m),levelScale:m.reciprocal)));
-		Out.ar(1,SinOsc.ar(55*m,EnvGen.ar(Env(~angle1.scramble,~m)),EnvGen.ar(Env(~mag1.scramble,~m),levelScale:m.reciprocal)));
+		Out.ar(0,SinOsc.ar(55*m,EnvGen.ar(Env(~angle.scramble,~m.normalize)),EnvGen.ar(Env(~mag.normalize.scramble,~m.normalize),levelScale:m.reciprocal)));
+		Out.ar(1,SinOsc.ar(55*m,EnvGen.ar(Env(~angle1.scramble,~m.normalize)),EnvGen.ar(Env(~mag1.normalize.scramble,~m.normalize),levelScale:m.reciprocal)));
 
 	m=m+1
 
