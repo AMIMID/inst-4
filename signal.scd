@@ -114,3 +114,77 @@ var angle=0,m=1,ph,mag=0,ang,amp,angle1=90,ang1,ph1,mag1=90,amp1,mg,ph2,ph3;
 }
 }.play
 )
+
+//////////////////////////////////////////////////////////////////
+
+(
+{
+var angle=0,m=1,ph,mag=0,ang,amp,angle1=90,ang1,ph1,mag1=90,amp1,mg;
+
+1000.do{
+
+	angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
+	ang=angle;
+~angle=1000.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,360);ph=exp(Complex(0,1)*(ang.degrad)).phase;};
+
+		angle1=(angle1+(360-(360/1.6180339887499))).wrap(0,360);
+	ang1=angle1;
+~angle1=1000.collect{ang1=(ang1+(360-(360/1.6180339887499))).wrap(0,360);ph1=exp(Complex(0,1)*(ang1.degrad)).phase;};
+
+	mag=(mag+(360-(360/1.6180339887499))).wrap(0,360);
+	amp=mag;
+~mag=1000.collect{amp=(amp+(360-(360/1.6180339887499))).wrap(0,360)};
+
+	mag1=(mag1+(360-(360/1.6180339887499))).wrap(0,360);
+	amp1=mag1;
+~mag1=1000.collect{amp1=(amp1+(360-(360/1.6180339887499))).wrap(0,360)};
+
+		mg=mag;
+~m=999.collect{mg=(mg+(360-(360/1.6180339887499))).wrap(0,360)};
+
+		Out.ar(0,HPF.ar(
+SinOsc.ar(10*m,EnvGen.ar(Env(~angle,~m.normalize)),EnvGen.ar(Env(~mag.normalize.scramble,~m.normalize),levelScale:m.reciprocal)),
+1000));
+		Out.ar(1,HPF.ar(
+SinOsc.ar(10*m,EnvGen.ar(Env(~angle1,~m.normalize)),EnvGen.ar(Env(~mag1.normalize.scramble,~m.normalize),levelScale:m.reciprocal)),
+1000));
+
+	m=m+1
+
+}
+}.play
+)
+
+
+
+
+Buffer.freeAll
+~b= Buffer.alloc(s,2048);
+
+		tf = Signal.sineFill(1025,~mag.normalize,~angle);
+//		tf=tf.normalize;
+tf.plot;
+tfBuf=~b.loadCollection(tf.asWavetableNoWrap);
+
+
+	bank.do{
+
+
+	{Osc.ar(tfBuf,220)}.play;
+
+
+Signal.sineFill(1025,~mag.normalize,~angle).plot;
+
+
+(
+var angle=0,m=1,ph,mag=0,ang,amp,angle1=90,ang1,ph1,mag1=90,amp1,mg;
+
+	ang=angle;
+~angle=1000.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,360);ph=exp(Complex(0,1)*(ang.degrad)).phase;};
+
+	amp=mag;
+~mag=1000.collect{amp=(amp+(360-(360/1.6180339887499))).wrap(0,360)};
+
+
+
+)
