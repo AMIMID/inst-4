@@ -280,7 +280,7 @@ r=[0,0,1].normalizeSum;
 v2=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 v3=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
-~az = 400.collect{
+~az = 2000.collect{
 
 		az1=(az1+(360-(360/1.6180339887499))).wrap(180.neg,180);
 
@@ -301,7 +301,7 @@ v3=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
 	};
 
-~el = 400.collect{
+~el = 2000.collect{
 
 		az2=(az2+(360-(360/1.6180339887499))).wrap(180.neg,180);
 
@@ -338,7 +338,7 @@ v22=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 v33=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 v44=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
-~freq = 400.collect{
+~freq = 2000.collect{
 
 	az1=~az.[pl1];
 	el1=~el.[pl1];
@@ -373,7 +373,7 @@ v44=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
 	};
 
-~phase = 400.collect{
+~phase = 2000.collect{
 
 		az2=~az.[pl2];
 	el2=~el.[pl2];
@@ -409,7 +409,7 @@ v44=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
 	};
 
-~mag = 400.collect{
+~mag = 2000.collect{
 
 		az3=~az.[pl3];
 	el3=~el.[pl3];
@@ -450,39 +450,44 @@ v44=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
 (
 {
-var pl=0,freq,amp,phase,phase1,fund=220,frequency,freqq,ampp,ph,ph1,angle=0,ang;
+var pl=0,freq,amp,phase,phase1,fund=220,frequency,freqq,ampp,ph,ph1,angle=0,ang,amp1,ampp1;
 
-400.do{
+2000.do{
 		freq=~freq.[pl];
 		phase=~phase.[pl];
-		phase1=~phase.[pl]+90;
+		phase1=~phase.reverse.[pl];
 		amp=~mag.[pl];
+		amp1=~mag.reverse.[pl];
 
 		frequency=fund*freq.reciprocal;
 //~frequency=100.collect{freq=(freq+(360-(360/1.6180339887499))).wrap(360.neg,360);
 	//		freqq=freq.linlin(360.neg,360,1.neg,1).abs};
 
-~angle=100.collect{phase=(phase+(360-(360/1.6180339887499))).wrap(360.neg,360);
+~angle=10.collect{phase=(phase+(360-(360/1.6180339887499))).wrap(360.neg,360);
 			ph=exp(Complex(0,1)*(phase.degrad)).phase};
 
-~angle1=100.collect{phase1=(phase1+(360-(360/1.6180339887499))).wrap(360.neg,360);
+~angle1=10.collect{phase1=(phase1+(360-(360/1.6180339887499))).wrap(360.neg,360);
 			ph1=exp(Complex(0,1)*(phase1.degrad)).phase};
 
 
-~magn=100.collect{amp=(amp+(360-(360/1.6180339887499))).wrap(360.neg,360);
+~magn=10.collect{amp=(amp+(360-(360/1.6180339887499))).wrap(360.neg,360);
 			ampp=amp.linlin(360.neg,360,1.neg,1).abs};
+
+	~magn1=10.collect{amp1=(amp1+(360-(360/1.6180339887499))).wrap(360.neg,360);
+			ampp1=amp1.linlin(360.neg,360,1.neg,1).abs};
 
 
 	angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
 	ang=angle;
 
-~m1=99.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,360)};
+~m1=9.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,360)};
 
-Out.ar(0,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle,~m1)),EnvGen.ar(Env.circle(~magn,~m1),levelScale:(freq))));
-Out.ar(1,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle1,~m1)),EnvGen.ar(Env.circle(~magn,~m1),levelScale:(freq))));
+Out.ar(0,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle.mirror,~m1.mirror)),EnvGen.ar(Env.circle(~magn.mirror,~m1.mirror),levelScale:(freq))));
+Out.ar(1,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle1.mirror,~m1.reverse.mirror)),EnvGen.ar(Env.circle(~magn1.mirror,~m1.reverse.mirror),levelScale:(freq))));
 
 		pl=pl+1
 
 }
 }.play
 )
+
