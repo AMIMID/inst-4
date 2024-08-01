@@ -890,7 +890,7 @@ v44=Quaternion(0,r.[0].sqrt,r.[1].sqrt,r.[2].sqrt);
 
 (
 {
-var pl=0,freq,amp,phase,phase1,fund=55,frequency,freqq,ampp,ph,ph1,angle=0,ang,amp1,ampp1,time,timee,time1,timee1;
+var pl=0,freq,amp,phase,phase1,fund=55,frequency,freqq,ampp,ph,ph1,angle=0,ang,amp1,ampp1,time,timee,time1,timee1,m=1;
 
 400.do{
 		time=~t.[pl];
@@ -921,17 +921,19 @@ var pl=0,freq,amp,phase,phase1,fund=55,frequency,freqq,ampp,ph,ph1,angle=0,ang,a
 			ampp1=amp1.linlin(360.neg,360,1.neg,1).abs};
 
 
-	angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
-	ang=angle;
+	//angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
+	//ang=angle;
 
 
-		freq=ang.linlin(0,360,0,1);
-frequency=fund*freq.reciprocal;
+		//freq=ang.linlin(0,360,0,1);
+//frequency=fund*freq.reciprocal;
+		frequency=fund*m;
 
-Out.ar(0,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle.mirror,~time.mirror)),EnvGen.ar(Env.circle(~magn.mirror,~time.mirror),levelScale:(freq))));
-Out.ar(1,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle1.mirror,~time1.mirror)),EnvGen.ar(Env.circle(~magn1.mirror,~time1.mirror),levelScale:(freq))));
+Out.ar(0,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle.mirror,~time.mirror)),EnvGen.ar(Env.circle(~magn.mirror,~time.mirror),levelScale:(m.reciprocal))));
+Out.ar(1,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle1.mirror,~time1.mirror)),EnvGen.ar(Env.circle(~magn1.mirror,~time1.mirror),levelScale:(m.reciprocal))));
 
-		pl=pl+1
+		pl=pl+1;
+		m=m+1;
 
 }
 }.play
