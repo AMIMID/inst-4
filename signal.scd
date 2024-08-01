@@ -941,10 +941,39 @@ Out.ar(1,SinOsc.ar(frequency,EnvGen.ar(Env.circle(~angle1.mirror,~time1.mirror))
 
 
 
+////////////
+
+(
+{
+var angle=0,m=1,ph,mag=0,ang,amp,angle1=90,ang1,ph1,mag1=0,amp1,mg,magnitude,magnitude1,phasee,power,power1,t;
+
+100.do{
+
+	angle=(angle+(360-(360/1.6180339887499))).wrap(0,360);
+	ang=angle;
+phasee=100.collect{ang=(ang+(360-(360/1.6180339887499))).wrap(0,360);ph=exp(Complex(0,1)*(ang.degrad)).phase;};
+
+	mag=(mag+(360-(360/1.6180339887499))).wrap(0,360);
+	amp=mag;
+power=100.collect{amp=(amp+(360-(360/1.6180339887499))).wrap(0,360);magnitude=exp(Complex(0,1)*(amp.degrad)).real.abs;};
+
+	mag1=(mag1+(360-(360/1.6180339887499))).wrap(0,360);
+	amp1=mag1;
+power1=100.collect{amp1=(amp1+(360-(360/1.6180339887499))).wrap(0,360);magnitude=exp(Complex(0,1)*(amp1.degrad)).imag.abs;};
+
+		mg=mag;
+t=99.collect{mg=(mg+(360-(360/1.6180339887499))).wrap(0,360)};
+
+		Out.ar(0,SinOsc.ar(55*m,EnvGen.ar(Env.circle(phasee,[0.1])),EnvGen.ar(Env.circle(power,[0.1]),levelScale:m.reciprocal)));
+	Out.ar(1,SinOsc.ar(55*m,EnvGen.ar(Env.circle(phasee,[0.1])),EnvGen.ar(Env.circle(power1,[0.1]),levelScale:m.reciprocal)));
+
+	m=m+1
+
+}
+}.play
+)
 
 
-
-;
 
 
 
