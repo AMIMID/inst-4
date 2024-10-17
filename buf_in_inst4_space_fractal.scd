@@ -11,23 +11,7 @@ s.waitForBoot
 )
 
 Buffer.freeAll
-/////wavetables
-Buffer.freeAll
-(
-~t= Buffer.alloc(s,2048);
-)
 
-(
-var signal,wt,m=0,amp;
-
-~level=90.collect{m=m+1;amp=m.reciprocal};
-~phase=90.collect{pi};
-signal=Signal.sineFill(1024,~level,~phase);
-// .
-wt = signal.asWavetable;
-~t.loadCollection(wt);
-signal.plot;
-)
 
 //////////phase shift
 ~c1 = Buffer.readChannel(s,,channels:0 );
@@ -97,7 +81,7 @@ wt = signal.asWavetable;
 )
 
 //////////arrays
-~time=3;
+~time=64;
 ///1= about 15:30 min in normal+reverse sequence
 ///fractal
 (
@@ -657,65 +641,6 @@ rel3=Cartesian(v3.b.round(0.0001),v3.c.round(0.0001),v3.d.round(0.0001)).phi.rou
 };
 
 )
-/////////////////notes and durs
-(
-var dur=4,ph1,ph2,ph3,pl1=0,pl2=0,pl3=0,pl4=0,pl5=0,pl6=0,sph1,sph2,sph3,n1,n2,n3,mult=10;
-var mag1,mag2,mag3,rythm,index1,index2,index3,pl7=0,pl8=0,pl9=0,t1,t2,t3;
-
-////L-system algae variable a,b rules:a=ab b=a , n3 for n0=a
-rythm=[1,1/2,1,1,1/2];
-
-~phase2 = (45*~time).collect{
-	ph1=~magx.normalize(0,1).[pl1];
-	index1=rythm.wrapAt(pl7);
-	pl7=pl7+1;
-	pl1=pl1+1;
-	ph1=(ph1*dur).round(1/8);
-	t1=ph1*index1;
-
-	};
-
-~phase3 = (45*~time).collect{
-	ph2=~magy.normalize(0,1).[pl2];
-	index2=rythm.wrapAt(pl8);
-	pl8=pl8+1;
-	pl2=pl2+1;
-	ph2=(ph2*dur).round(1/8);
-	t2=ph2*index2;
-	};
-
-~phase4 = (45*~time).collect{
-	ph3=~magz.normalize(0,1).[pl3];
-	index3=rythm.wrapAt(pl9);
-	pl9=pl9+1;
-	pl3=pl3+1;
-	ph3=(ph3*dur).round((1/8));
-	t3=ph3*index3;
-	};
-
-~n2 = (45*~time).collect{
-	mag1=Cartesian(~magx.normalize(0,1).[pl4],~magy.normalize(0,1).[pl4],~magz.normalize(0,1).[pl4]).rho/(2.sqrt);
-	sph1=Spherical(mag1*mult,~az.[pl4],~el.[pl4]).x;
-	pl4=pl4+1;
-	n1=(sph1).round(1);
-	};
-
-~n3 = (45*~time).collect{
-	mag2=Cartesian(~magx.normalize(0,1).[pl5],~magy.normalize(0,1).[pl5],~magz.normalize(0,1).[pl5]).rho/(2.sqrt);
-	sph2=Spherical(mag2*mult,~az.[pl5],~el.[pl5]).y;
-	pl5=pl5+1;
-	n2=(sph2).round(1);
-	};
-
-~n4 = (45*~time).collect{
-	mag3=Cartesian(~magx.normalize(0,1).[pl6],~magy.normalize(0,1).[pl6],~magz.normalize(0,1).[pl6]).rho/(2.sqrt);
-	sph3=Spherical(mag3*mult,~az.[pl6],~el.[pl6]).z;
-	pl6=pl6+1;
-	n3=(sph3).round(1);
-	};
-
-)
-
 
 /////////////////////extra radomizer
 
@@ -765,7 +690,7 @@ SynthDef.new(\o1, {
 	chainy = FFT(LocalBuf(frames), in2);
 
 	bank1=3;
-	bank2=360;
+	bank2=90;
 
 	bank1.do{
 
@@ -781,19 +706,19 @@ amp2=Cartesian(~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1],~
 		phase1=exp(Complex(0,1)*(amp1.theta*amp1.phi));
 		phase2=exp(Complex(0,1)*(amp2.theta*amp2.phi));
 
-chainxx = chainx.pvcollect(frames, {|mag, phase, index| [mag*amp1.rho(2/sqrt), exp(Complex(0,1)*(phase+phase1)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
-chainyy = chainy.pvcollect(frames, {|mag, phase, index| [mag*amp2.rho(2/sqrt), exp(Complex(0,1)*(phase+phase2)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
+chainxx = chainx.pvcollect(frames, {|mag, phase, index| [mag*amp1.rho/(2.sqrt), exp(Complex(0,1)*(phase+phase1)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
+chainyy = chainy.pvcollect(frames, {|mag, phase, index| [mag*amp2.rho/(2.sqrt), exp(Complex(0,1)*(phase+phase2)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
 
 	b=b+1;
 
 		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,
 		Osc.ar(~t,rpr,phase:az1.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-			Osc.ar(~t,speed*rpr,phase:el1.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
+			Osc.ar(~t,rpr,phase:el1.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
 
 		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,
 		Osc.ar(~t,rpr,phase:az2.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
 			Osc.ar(~t,rpr,phase:el2.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
-
+pl=pl+1;
 	pl1=pl1+1;
 
 		};
@@ -815,35 +740,35 @@ SynthDef.new(\o2, {
 	chainy = FFT(LocalBuf(frames), in2);
 
 	bank1=3;
-	bank2=360;
+	bank2=90;
 
 	bank1.do{
 
    bank2.do{
 
-		az1=~az_x.[pl];
-		el1=~el_x.[pl];
-		az2=~az_x.neg.[pl];
-		el2=~el_x.neg.[pl];
+		az1=~az_y.[pl];
+		el1=~el_y.[pl];
+		az2=~az_y.neg.[pl];
+		el2=~el_y.neg.[pl];
 amp1=Cartesian(~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1]);
 amp2=Cartesian(~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1]);
 
 		phase1=exp(Complex(0,1)*(amp1.theta*amp1.phi));
 		phase2=exp(Complex(0,1)*(amp2.theta*amp2.phi));
 
-chainxx = chainx.pvcollect(frames, {|mag, phase, index| [mag*amp1.rho(2/sqrt), exp(Complex(0,1)*(phase+phase1)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
-chainyy = chainy.pvcollect(frames, {|mag, phase, index| [mag*amp2.rho(2/sqrt), exp(Complex(0,1)*(phase+phase2)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
+chainxx = chainx.pvcollect(frames, {|mag, phase, index| [mag*amp1.rho/(2.sqrt), exp(Complex(0,1)*(phase+phase1)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
+chainyy = chainy.pvcollect(frames, {|mag, phase, index| [mag*amp2.rho/(2.sqrt), exp(Complex(0,1)*(phase+phase2)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
 
 	b=b+1;
 
 		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,
 		Osc.ar(~t,rpr,phase:az1.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-			Osc.ar(~t,speed*rpr,phase:el1.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
+			Osc.ar(~t,rpr,phase:el1.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
 
 		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,
 		Osc.ar(~t,rpr,phase:az2.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
 			Osc.ar(~t,rpr,phase:el2.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
-
+pl=pl+1;
 	pl1=pl1+1;
 
 		};
@@ -865,35 +790,35 @@ SynthDef.new(\o3, {
 	chainy = FFT(LocalBuf(frames), in2);
 
 	bank1=3;
-	bank2=360;
+	bank2=90;
 
 	bank1.do{
 
    bank2.do{
 
-		az1=~az_x.[pl];
-		el1=~el_x.[pl];
-		az2=~az_x.neg.[pl];
-		el2=~el_x.neg.[pl];
+		az1=~az_z.[pl];
+		el1=~el_z.[pl];
+		az2=~az_z.neg.[pl];
+		el2=~el_z.neg.[pl];
 amp1=Cartesian(~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1]);
 amp2=Cartesian(~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1]);
 
 		phase1=exp(Complex(0,1)*(amp1.theta*amp1.phi));
 		phase2=exp(Complex(0,1)*(amp2.theta*amp2.phi));
 
-chainxx = chainx.pvcollect(frames, {|mag, phase, index| [mag*amp1.rho(2/sqrt), exp(Complex(0,1)*(phase+phase1)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
-chainyy = chainy.pvcollect(frames, {|mag, phase, index| [mag*amp2.rho(2/sqrt), exp(Complex(0,1)*(phase+phase2)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
+chainxx = chainx.pvcollect(frames, {|mag, phase, index| [mag*amp1.rho/(2.sqrt), exp(Complex(0,1)*(phase+phase1)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
+chainyy = chainy.pvcollect(frames, {|mag, phase, index| [mag*amp2.rho/(2.sqrt), exp(Complex(0,1)*(phase+phase2)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
 
 	b=b+1;
 
 		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,
 		Osc.ar(~t,rpr,phase:az1.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-			Osc.ar(~t,speed*rpr,phase:el1.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
+			Osc.ar(~t,rpr,phase:el1.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
 
 		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,
 		Osc.ar(~t,rpr,phase:az2.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
 			Osc.ar(~t,rpr,phase:el2.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
-
+pl=pl+1;
 	pl1=pl1+1;
 
 		};
@@ -927,35 +852,35 @@ SynthDef.new(\o_in, {
 	chainy = FFT(LocalBuf(frames), in2);
 
 	bank1=3;
-	bank2=360;
+	bank2=90;
 
 	bank1.do{
 
    bank2.do{
 
-		az1=~az_x.[pl];
-		el1=~el_x.[pl];
-		az2=~az_x.neg.[pl];
-		el2=~el_x.neg.[pl];
+		az1=~az.[pl];
+		el1=~el.[pl];
+		az2=~az.neg.[pl];
+		el2=~el.neg.[pl];
 amp1=Cartesian(~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1]);
 amp2=Cartesian(~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1]);
 
 		phase1=exp(Complex(0,1)*(amp1.theta*amp1.phi));
 		phase2=exp(Complex(0,1)*(amp2.theta*amp2.phi));
 
-chainxx = chainx.pvcollect(frames, {|mag, phase, index| [mag*amp1.rho(2/sqrt), exp(Complex(0,1)*(phase+phase1)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
-chainyy = chainy.pvcollect(frames, {|mag, phase, index| [mag*amp2.rho(2/sqrt), exp(Complex(0,1)*(phase+phase2)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
+chainxx = chainx.pvcollect(frames, {|mag, phase, index| [mag*amp1.rho/(2.sqrt), exp(Complex(0,1)*(phase+phase1)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
+chainyy = chainy.pvcollect(frames, {|mag, phase, index| [mag*amp2.rho/(2.sqrt), exp(Complex(0,1)*(phase+phase2)).theta]; }, frombin: b, tobin: b, zeroothers: 1);
 
 	b=b+1;
 
 		Out.ar(0,VBAP.ar(4,IFFT(chainxx),~b.bufnum,
 		Osc.ar(~t,rpr,phase:az1.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-			Osc.ar(~t,speed*rpr,phase:el1.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
+			Osc.ar(~t,rpr,phase:el1.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
 
 		Out.ar(0,VBAP.ar(4,IFFT(chainyy),~b.bufnum,
 		Osc.ar(~t,rpr,phase:az2.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
 			Osc.ar(~t,rpr,phase:el2.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)));
-
+pl=pl+1;
 	pl1=pl1+1;
 
 		};
