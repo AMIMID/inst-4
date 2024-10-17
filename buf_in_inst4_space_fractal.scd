@@ -3,7 +3,7 @@ s.options.numWireBufs = 1024*4;
 s.options.numOutputBusChannels=4;
 s.options.numInputBusChannels=2;
 TempoClock.default.tempo_(0.5);
-s.options.memSize = 8192*64;
+s.options.memSize = 8192*8;
 s.options.blockSize = 64/1;
 s.options.maxNodes = 1024 * 16;
 s.options.sampleRate= 48000;
@@ -30,8 +30,8 @@ SynthDef("help-phaseShift", { arg out=0;
 
 ////////////////buffers
 (
-~c1 = Buffer.readChannel(s,,channels:0 );
-~c2 = Buffer.readChannel(s,,channels:1 );
+~c1 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Dokuments/EXTERNAL/music/piece of my heart Intermission.wav",channels:0 );
+~c2 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Dokuments/EXTERNAL/music/piece of my heart Intermission.wav",channels:1 );
 ~c3 = Buffer.readChannel(s,,channels:0 );
 ~c4 = Buffer.readChannel(s,,channels:1 );
 ~c5 = Buffer.readChannel(s,,channels:0 );
@@ -41,9 +41,7 @@ SynthDef("help-phaseShift", { arg out=0;
 /////wavetables
 Buffer.freeAll
 
-(
 ~t= Buffer.alloc(s,2048);
-);
 
 
 (
@@ -698,8 +696,8 @@ SynthDef.new(\o1, {
 
 		az1=~az_x.[pl];
 		el1=~el_x.[pl];
-		az2=~az_x.neg.[pl];
-		el2=~el_x.neg.[pl];
+		az2=~az_x.reverse.[pl];
+		el2=~el_x.reverse.[pl];
 amp1=Cartesian(~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1]);
 amp2=Cartesian(~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1]);
 
@@ -748,8 +746,8 @@ SynthDef.new(\o2, {
 
 		az1=~az_y.[pl];
 		el1=~el_y.[pl];
-		az2=~az_y.neg.[pl];
-		el2=~el_y.neg.[pl];
+		az2=~az_y.reverse.[pl];
+		el2=~el_y.reverse.[pl];
 amp1=Cartesian(~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1]);
 amp2=Cartesian(~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1]);
 
@@ -798,8 +796,8 @@ SynthDef.new(\o3, {
 
 		az1=~az_z.[pl];
 		el1=~el_z.[pl];
-		az2=~az_z.neg.[pl];
-		el2=~el_z.neg.[pl];
+		az2=~az_z.reverse.[pl];
+		el2=~el_z.reverse.[pl];
 amp1=Cartesian(~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1]);
 amp2=Cartesian(~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1]);
 
@@ -830,17 +828,18 @@ pl=pl+1;
 
 (
 Synth(\o1);
-s.record(numChannels:4)
+//s.record(numChannels:4)
 Synth(\o2);
-s.record(numChannels:4)
+//s.record(numChannels:4)
 Synth(\o3);
+//s.record(numChannels:4)
 )
 ////exp(Complex(0,1)*(phase+SinOsc.ar(mg,phase1))).theta
 //////////////////////////////////////IN
 
 (
 SynthDef.new(\o_in, {
-    var in1,in2, chainx,chainy,b=0,az1=0,az2=0,el1=0,el2=0,rpr=1/2;
+    var in1,in2, chainx,chainy,b=0,az1=0,az2=0,el1=0,el2=0,rpr=1;
 	var chainxx,chainyy,pl1=0,pl2=0,pl=0,amp1,amp2,phase;
 	var angle1=0,angle2=90;
 	var phase1,phase2,bank1,bank2,frames=1024;
@@ -860,8 +859,8 @@ SynthDef.new(\o_in, {
 
 		az1=~az.[pl];
 		el1=~el.[pl];
-		az2=~az.neg.[pl];
-		el2=~el.neg.[pl];
+		az2=~az.reverse.[pl];
+		el2=~el.reverse.[pl];
 amp1=Cartesian(~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1],~magx_array.[pl2].[pl1]);
 amp2=Cartesian(~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1],~magx_array.[pl2].reverse.[pl1]);
 
