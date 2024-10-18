@@ -139,7 +139,7 @@ var az=0,el=0;
 var m=600,sph,az1,el1,pl=0,daz,del,harm,mag,r;
 var r1,harm1,r2,harm2,rad;
 
-data = (360*100).collect{
+data = (360*8).collect{
 
 	az=~az.[pl];
 	el=~el.[pl];
@@ -297,7 +297,7 @@ Slider(w, Rect(920, 10, 10, 450)).action_{|me|
 };
 )
 
-//////////////////animation
+////////////////////////////////////////////animation
 
 (
 var data;
@@ -312,10 +312,10 @@ data = (360*16).collect{
 	az=~az.[pl];
 	el=~el.[pl];
 	//mag=~magz.[pl];
-	mag=Cartesian(~magx.[pl]/(2.sqrt),~magy.[pl]/(2.sqrt),~magz.[pl]/(2.sqrt)).rho/(2.sqrt);
+	mag=Cartesian(~magx.[pl],~magy.[pl],~magz.[pl]).rho/(2.sqrt);
 	pl=pl+1;
 
-	sph=Spherical(mag,az,el).asCartesian.asArray;
+	sph=Spherical(mag*800,az,el).asCartesian.asArray;
 
 
 };
@@ -363,7 +363,7 @@ data = (360*10).collect{
 	az=~az.[pl];
 	el=~el.[pl];
 	//mag=~magx.[pl];
-	mag=Cartesian(~magx.[pl]/(2.sqrt),~magy.[pl]/(2.sqrt),~magz.[pl]/(2.sqrt)).rho/(2.sqrt);
+	mag=Cartesian(~magx.[pl],~magy.[pl],~magz.[pl]).rho/(2.sqrt);
 	pl=pl+1;
 
 
@@ -382,7 +382,7 @@ q=(cos(angle.degrad)+(sin(angle.degrad)*(i+j+k)));
 
 	del=Cartesian(v.b.round(0.0001),v.c.round(0.0001),v.d.round(0.0001)).phi;
 
-	harm=Spherical(mag,daz,del).asCartesian.asArray
+	harm=Spherical(mag*800,daz,del).asCartesian.asArray
 
 
 };
