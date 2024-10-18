@@ -71,7 +71,7 @@ wt = signal.asWavetable;
 )
 
 //////////arrays
-~time=1;
+~time=2;
 ///1= about 15:30 min in normal+reverse sequence
 ///fractal
 (
@@ -695,7 +695,7 @@ rythm=[1,1/2,1,1,1/2];
 var ang=0,level,levels,env,pl;
 ~levels=180.collect{ level=exp(Complex(0,1)*ang).imag; ang=ang+1.degrad;
 	levels=level.rrand(exp(Complex(0,1)*ang+((360/64)-((360/64)/1.6180339887499)).degrad).imag);};
-//env=Env(~levels,[16/360]);env.plot;
+env=Env(~levels,[16/360]);env.plot;
 )
 
 ////perc
@@ -745,15 +745,15 @@ var mag1,mag2,mag3,rythm,index1,index2,index3,pl7=0,pl8=0,pl9=0,t1,t2,t3;
 (
 SynthDef.new(\ospace1, {
     arg  n1=1,decay=6,fund=55,octave=2,cutt=10,rpr=1,speed=10;
-	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=0,rq=1,cutt_freq=1,fundamental=55/1;
+	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=0,rq=1,cutt_freq=1,fundamental=110/(speed);
 	var freq,m=1,bank1,bank2,pitch=1, angle=360,rad,env,gate=1;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
 var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
-bank1=3;
-	bank2=4;
+bank1=2;
+	bank2=8;
 ton=2.pow(n1/(2*6));
 freq=(fundamental*fund*octave);
 
@@ -763,20 +763,20 @@ bank2.do{
 
 mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[pl2].[pl1]);
 
+	sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az_z.[pl1],~el_z.[pl1]);
+			//sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az.[pl1],~el.[pl1]);
+
 			phase=exp(Complex(0,1)*(mag_o.theta*mag_o.phi));
 			amp=m.reciprocal*ton.reciprocal;
-		pitch=freq*amp.reciprocal;
+		pitch=freq*amp.reciprocal*sphere.rho.reciprocal;
 
-		//sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az_x.[pl1],~el_x.[pl1]);
-			sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az.[pl1],~el.[pl1]);
+env=EnvGen.ar(Env(~levels*fund.reciprocal*octave.reciprocal,[decay/360],4.neg),doneAction:2,levelScale:0.333);
 
-env=EnvGen.ar(Env(~levels,[decay/360],4.neg),doneAction:2,levelScale:fund.reciprocal*octave.reciprocal);
-
-		cutt_freq=(sphere.rho.reciprocal*freq*ton*m*env).round(0.00001);
+		cutt_freq=(pitch*env).round(0.00001);
 			rq=(fundamental/cutt_freq).round(0.00001);
 
 osc=VBAP.ar(4,
-LeakDC.ar(Osc.ar(~w.bufnum,pitch,mul:amp,phase:phase.theta)),
+LeakDC.ar(Osc.ar(~w.bufnum,pitch,mul:amp*sphere.rho,phase:phase.theta)),
 ~b.bufnum,
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
@@ -795,15 +795,15 @@ pl1=pl1+1;
 (
 SynthDef.new(\ospace2, {
     arg  n1=1,decay=6,fund=55,octave=2,cutt=10,rpr=1,speed=10;
-	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=0,rq=1,cutt_freq=1,fundamental=55/1;
+	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=0,rq=1,cutt_freq=1,fundamental=55/(speed);
 	var freq,m=1,bank1,bank2,pitch=1, angle=360,rad,env,gate=1;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
 var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
-bank1=3;
-	bank2=4;
+bank1=2;
+	bank2=8;
 ton=2.pow(n1/(2*6));
 freq=(fundamental*fund*octave);
 
@@ -813,19 +813,21 @@ bank2.do{
 
 mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[pl2].[pl1]);
 
+
+		sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az_y.[pl1],~el_y.[pl1]);
+			//sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az.[pl1],~el.[pl1]);
+
 			phase=exp(Complex(0,1)*(mag_o.theta*mag_o.phi));
 			amp=m.reciprocal*ton.reciprocal;
-		pitch=freq*amp.reciprocal;
+		pitch=freq*amp.reciprocal*sphere.rho.reciprocal;
 
-		//sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az_y.[pl1],~el_y.[pl1]);
-			sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az.[pl1],~el.[pl1]);
-env=EnvGen.ar(Env(~levels,[decay/360],4.neg),doneAction:2,levelScale:fund.reciprocal*octave.reciprocal);
+env=EnvGen.ar(Env(~levels*fund.reciprocal*octave.reciprocal,[decay/360],4.neg),doneAction:2,levelScale:0.333);
 
-		cutt_freq=(sphere.rho.reciprocal*freq*ton*m*env).round(0.00001);
+		cutt_freq=(pitch*env).round(0.00001);
 			rq=(fundamental/cutt_freq).round(0.00001);
 
 osc=VBAP.ar(4,
-LeakDC.ar(Osc.ar(~w.bufnum,pitch,mul:amp,phase:phase.theta)),
+LeakDC.ar(Osc.ar(~w.bufnum,pitch,mul:amp*sphere.rho,phase:phase.theta)),
 ~b.bufnum,
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
@@ -844,15 +846,15 @@ pl1=pl1+1;
 (
 SynthDef.new(\ospace3, {
     arg  n1=1,decay=6,fund=55,octave=2,cutt=10,rpr=1,speed=10;
-	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=0,rq=1,cutt_freq=1,fundamental=55/1;
+	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=0,rq=1,cutt_freq=1,fundamental=55/(speed);
 	var freq,m=1,bank1,bank2,pitch=1, angle=360,rad,env,gate=1;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
 var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
-bank1=3;
-	bank2=4;
+bank1=2;
+	bank2=8;
 ton=2.pow(n1/(2*6));
 freq=(fundamental*fund*octave);
 
@@ -862,19 +864,20 @@ bank2.do{
 
 mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[pl2].[pl1]);
 
+		sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az_z.[pl1],~el_z.[pl1]);
+			//sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az.[pl1],~el.[pl1]);
+
 			phase=exp(Complex(0,1)*(mag_o.theta*mag_o.phi));
 			amp=m.reciprocal*ton.reciprocal;
-		pitch=freq*amp.reciprocal;
+		pitch=freq*amp.reciprocal*sphere.rho.reciprocal;
 
-		//sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az_z.[pl1],~el_z.[pl1]);
-			sphere=Spherical(mag_o.rho.round(0.00001)/(2.sqrt),~az.[pl1],~el.[pl1]);
-env=EnvGen.ar(Env(~levels,[decay/360],4.neg),doneAction:2,levelScale:fund.reciprocal*octave.reciprocal);
+env=EnvGen.ar(Env(~levels*fund.reciprocal*octave.reciprocal,[decay/360],4.neg),doneAction:2,levelScale:0.333);
 
-		cutt_freq=(sphere.rho.reciprocal*freq*ton*m*env).round(0.00001);
+		cutt_freq=(pitch*env).round(0.00001);
 			rq=(fundamental/cutt_freq).round(0.00001);
 
 osc=VBAP.ar(4,
-LeakDC.ar(Osc.ar(~w.bufnum,pitch,mul:amp,phase:phase.theta)),
+LeakDC.ar(Osc.ar(~w.bufnum,pitch,mul:amp*sphere.rho,phase:phase.theta)),
 ~b.bufnum,
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
@@ -902,7 +905,7 @@ a=Pdef(\1, Pbind(\instrument, \ospace1,
 	\dur,Pseq(~phase2.mirror,1),
 \n1,PdegreeToKey(Pseq(~n2.mirror,inf),Scale.phrygian),
 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-		\octave,Prand([1,2,4,8],inf),
+		\octave,Prand([1,2,4],inf),
 	\fund,Prand([1,4/3,3/2,2],inf),
 	\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf),
@@ -912,7 +915,7 @@ b=Pdef(\2, Pbind(\instrument, \ospace2,
 	\dur,Pseq(~phase3.mirror,1),
 \n1,PdegreeToKey(Pseq(~n3.mirror,inf),Scale.phrygian),
 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-			\octave,Prand([1,2,4,8],inf),
+			\octave,Prand([1,2,4],inf),
 	\fund,Prand([1,4/3,3/2,2],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf),
@@ -922,7 +925,7 @@ c=Pdef(\3, Pbind(\instrument, \ospace3,
 	\dur,Pseq(~phase4.mirror,1),
 \n1,PdegreeToKey(Pseq(~n4.mirror,inf),Scale.phrygian),
 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-			\octave,Prand([1,2,4,8],inf),
+			\octave,Prand([1,2,4],inf),
 	\fund,Prand([1,4/3,3/2,2],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf),
@@ -932,7 +935,7 @@ d=Pdef(\4, Pbind(\instrument, \ospace1,
 	\dur,Pseq(~phase2.reverse.mirror,1),
 \n1,PdegreeToKey(Pseq(~n2.reverse.mirror,inf),Scale.phrygian),
 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-			\octave,Prand([1,2,4,8],inf),
+			\octave,Prand([1,2,4],inf),
 	\fund,Prand([1,4/3,3/2,2],inf),
 		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf),
@@ -942,7 +945,7 @@ e=Pdef(\5, Pbind(\instrument, \ospace2,
 	\dur,Pseq(~phase3.reverse.mirror,1),
 \n1,PdegreeToKey(Pseq(~n3.reverse.mirror,inf),Scale.phrygian),
 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-		\octave,Prand([1,2,4,8],inf),
+		\octave,Prand([1,2,4],inf),
 	\fund,Prand([1,4/3,3/2,2],inf),
 		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf),
@@ -952,14 +955,14 @@ f=Pdef(\6, Pbind(\instrument, \ospace3,
 	\dur,Pseq(~phase4.reverse.mirror,1),
 \n1,PdegreeToKey(Pseq(~n4.reverse.mirror,inf),Scale.phrygian),
 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-		\octave,Prand([1,2,4,8],inf),
+		\octave,Prand([1,2,4],inf),
 	\fund,Prand([1,4/3,3/2,2],inf),
 		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf),
 	\decay,Pbrown(8,8,2,inf);
 ));
 	)
-	TempoClock.default.tempo_(1)
+	TempoClock.default.tempo_(2)
 
 (
 		(
