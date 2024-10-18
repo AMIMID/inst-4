@@ -30,8 +30,8 @@ SynthDef("help-phaseShift", { arg out=0;
 
 ////////////////buffers
 (
-~c1 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Dokuments/EXTERNAL/music/piece of my heart Intermission.wav",channels:0 );
-~c2 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Dokuments/EXTERNAL/music/piece of my heart Intermission.wav",channels:1 );
+~c1 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Dokuments/PROJECT  FILES/SC/inst-4 code/freesound_org recordings/705140__dibko__231007-04-strnisce-forest-full-of-life-04.wav",channels:0 );
+~c2 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Dokuments/PROJECT  FILES/SC/inst-4 code/freesound_org recordings/705140__dibko__231007-04-strnisce-forest-full-of-life-04.wav",channels:1 );
 ~c3 = Buffer.readChannel(s,,channels:0 );
 ~c4 = Buffer.readChannel(s,,channels:1 );
 ~c5 = Buffer.readChannel(s,,channels:0 );
@@ -828,7 +828,7 @@ pl=pl+1;
 
 (
 Synth(\o1);
-//s.record(numChannels:4)
+s.record(numChannels:4)
 Synth(\o2);
 //s.record(numChannels:4)
 Synth(\o3);
