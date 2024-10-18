@@ -30,7 +30,7 @@ var env,sig,wt,angle=0,level,levels;
 
 	level=exp(Complex(0,1)*angle).imag;
 		angle=angle+1.degrad;
-	levels=level.rrand(exp(Complex(0,1)*angle+((360-(360/1.6180339887499))/10).degrad).imag);
+	levels=level.rrand(exp(Complex(0,1)*angle+((360-(360/1.6180339887499))/1).degrad).imag);
 };
 env = Env(~levels,[1]);
 sig=env.asSignal(1024);
@@ -746,14 +746,14 @@ var mag1,mag2,mag3,rythm,index1,index2,index3,pl7=0,pl8=0,pl9=0,t1,t2,t3;
 (
 SynthDef.new(\ospace1, {
     arg  n1=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
-	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=1,rq=1,cutt_freq=1,fundamental=256*(speed.reciprocal);
+	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=1,rq=1,cutt_freq=1,fundamental=64*(speed.reciprocal);
 	var freq,m=1,bank1,bank2,pitch=1, angle=360,rad,env,gate=1;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
 var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
-bank1=3;
+bank1=4;
 	bank2=8;
 ton=2.pow(n1/(2*6));
 freq=(fundamental*octave);
@@ -773,7 +773,7 @@ mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[p
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.333);
 
-		cutt_freq=(pitch*env).round(0.00001);
+		cutt_freq=(freq*amp.reciprocal*sphere.rho).round(0.00001);
 			rq=((sphere.rho.reciprocal)/cutt_freq).round(0.00001);
 
 osc=VBAP.ar(4,
@@ -796,14 +796,14 @@ pl1=pl1+1;
 (
 SynthDef.new(\ospace2, {
     arg  n1=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
-	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=1,rq=1,cutt_freq=1,fundamental=256*(speed.reciprocal);
+	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=1,rq=1,cutt_freq=1,fundamental=64*(speed.reciprocal);
 	var freq,m=1,bank1,bank2,pitch=1, angle=360,rad,env,gate=1;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
 var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
-bank1=3;
+bank1=4;
 	bank2=8;
 ton=2.pow(n1/(2*6));
 freq=(fundamental*octave);
@@ -824,7 +824,7 @@ mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[p
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.333);
 
-		cutt_freq=(pitch*env).round(0.00001);
+		cutt_freq=(freq*amp.reciprocal*sphere.rho).round(0.00001);
 			rq=((sphere.rho.reciprocal)/cutt_freq).round(0.00001);
 
 osc=VBAP.ar(4,
@@ -847,14 +847,14 @@ pl1=pl1+1;
 (
 SynthDef.new(\ospace3, {
     arg  n1=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
-	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=1,rq=1,cutt_freq=1,fundamental=256*(speed.reciprocal);
+	var phase,osc,sphere,mag_o,amp,ton,pl1=0,pl2=1,rq=1,cutt_freq=1,fundamental=64*(speed.reciprocal);
 	var freq,m=1,bank1,bank2,pitch=1, angle=360,rad,env,gate=1;
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
 var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
-bank1=3;
+bank1=4;
 	bank2=8;
 ton=2.pow(n1/(2*6));
 freq=(fundamental*octave);
@@ -874,7 +874,7 @@ mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[p
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.333);
 
-		cutt_freq=(pitch*env).round(0.00001);
+		cutt_freq=(freq*amp.reciprocal*sphere.rho).round(0.00001);
 			rq=((sphere.rho.reciprocal)/cutt_freq).round(0.00001);
 
 osc=VBAP.ar(4,
@@ -950,16 +950,16 @@ f=Pdef(\6, Pbind(\instrument, \ospace3,
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
 	)
-TempoClock.default.tempo_(1)
+TempoClock.default.tempo_(0.5)
 
 (
 		(
 a.play;
-//s.record(numChannels:4,duration:45)
+s.record(numChannels:4)
 b.play;
-//s.record(numChannels:4,duration:45)
+s.record(numChannels:4)
 c.play;
-//s.record(numChannels:4,duration:45)
+s.record(numChannels:4)
 );
 d.play;
 //s.record(numChannels:4,duration:45)
