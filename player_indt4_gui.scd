@@ -14,8 +14,8 @@ s.waitForBoot
 Buffer.freeAll
 
 (
-~c1 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/inst-4/piknotites3/SC_241018_151908.wav");
-~c2 = Buffer.read(s,);
+~c1 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/SC_241018_214754.wav");
+~c2 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/SC_241018_221314.wav");
 )
 
 (
@@ -24,13 +24,13 @@ SynthDef.new(\inst4,
 		arg lowpass1=440,highpass1=440,lowpass2=440,highpass2=440,gain1=1,gain2=1,mix1=1,mix2=1;
 		var sig1a,sig2a,sig1b,sig2b;
 
-sig1a=FreeVerb.ar(HPF.ar(PlayBuf.ar(4, ~c1.bufnum, BufRateScale.kr(~c1), loop: 0, doneAction:2),highpass1.lag(0.333),gain1.lag(0.333)),mix:mix1,room:1);
-sig1b=FreeVerb.ar(LPF.ar(PlayBuf.ar(4, ~c1.bufnum, BufRateScale.kr(~c1), loop: 0, doneAction:2),lowpass1.lag(0.333),gain1.lag(0.333)),mix:mix1,room:1);
-//sig2a=FreeVerb.ar(HPF.ar(PlayBuf.ar(4, ~c2.bufnum, BufRateScale.kr(~c2), loop: 0, doneAction:2),highpass2.lag(0.333),gain2.lag(0.333)),mix:mix2,room:0.5);
-//sig2b=FreeVerb.ar(LPF.ar(PlayBuf.ar(4, ~c2.bufnum, BufRateScale.kr(~c2), loop: 0, doneAction:2),lowpass2.lag(0.333),gain2.lag(0.333)),mix:mix2,room:0.5);
+sig1a=FreeVerb.ar(HPF.ar(PlayBuf.ar(4, ~c1.bufnum, BufRateScale.kr(~c1), loop: 0, doneAction:0),highpass1.lag(0.333),gain1.lag(0.333)),mix:mix1,room:1);
+sig1b=FreeVerb.ar(LPF.ar(PlayBuf.ar(4, ~c1.bufnum, BufRateScale.kr(~c1), loop: 0, doneAction:0),lowpass1.lag(0.333),gain1.lag(0.333)),mix:mix1,room:1);
+sig2a=FreeVerb.ar(HPF.ar(PlayBuf.ar(4, ~c2.bufnum, BufRateScale.kr(~c2), loop: 0, doneAction:0),highpass2.lag(0.333),gain2.lag(0.333)),mix:mix2,room:0.5);
+sig2b=FreeVerb.ar(LPF.ar(PlayBuf.ar(4, ~c2.bufnum, BufRateScale.kr(~c2), loop: 0, doneAction:0),lowpass2.lag(0.333),gain2.lag(0.333)),mix:mix2,room:0.5);
 
 	Out.ar(0,sig1a);Out.ar(0,sig1b);
-	//Out.ar(0,sig2a);Out.ar(0,sig2b);
+	Out.ar(0,sig2a);Out.ar(0,sig2b);
 
 }).add;
 (
