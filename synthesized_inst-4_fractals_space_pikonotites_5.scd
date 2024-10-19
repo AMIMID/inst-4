@@ -633,108 +633,6 @@ rel3=Cartesian(v3.b.round(0.0001),v3.c.round(0.0001),v3.d.round(0.0001)).phi.rou
 
 )
 /////////////////notes and durs
-(
-var dur=4,ph1,ph2,ph3,pl1=0,pl2=0,pl3=0,pl4=0,pl5=0,pl6=0;
-var sph1,sph2,sph3,sph4,sph5,sph6,sph7,sph8,sph9;
-var n1,n2,n3,n4,n5,n6,n7,n8,n9,mult=10;
-var mag1,mag2,mag3,mag4,mag5,mag6,mag7,mag8,mag9,rythm;
-var index1,index2,index3,pl7=0,pl8=0,pl9=0,t1,t2,t3;
-var pl10=0,pl11=0,pl12=0,pl13=0,pl14=0,pl15=0;
-
-////L-system algae variable a,b rules:a=ab b=a , n3 for n0=a
-rythm=[1,1/2,1,1,1/2];
-
-~dur1 = (45*~time).collect{
-	ph1=Cartesian(~magx1.normalize(0,1).[pl1],~magy1.normalize(0,1).[pl1],~magz1.normalize(0,1).[pl1]).rho/(2.sqrt);
-	index1=rythm.wrapAt(pl7);
-	pl7=pl7+1;
-	pl1=pl1+1;
-	ph1=(ph1*dur).round(1/32);
-	t1=ph1*index1;
-
-	};
-
-~dur2 = (45*~time).collect{
-	ph2=Cartesian(~magx2.normalize(0,1).[pl2],~magy2.normalize(0,1).[pl2],~magz2.normalize(0,1).[pl2]).rho/(2.sqrt);
-	index2=rythm.wrapAt(pl8);
-	pl8=pl8+1;
-	pl2=pl2+1;
-	ph2=(ph2*dur).round(1/32);
-	t2=ph2*index2;
-	};
-
-~dur3 = (45*~time).collect{
-	ph3=Cartesian(~magx3.normalize(0,1).[pl6],~magy3.normalize(0,1).[pl3],~magz3.normalize(0,1).[pl3]).rho/(2.sqrt);
-	index3=rythm.wrapAt(pl9);
-	pl9=pl9+1;
-	pl3=pl3+1;
-	ph3=(ph3*dur).round((1/32));
-	t3=ph3*index3;
-	};
-
-~nx1 = (45*~time).collect{
-	mag1=Cartesian(~magx1.normalize(0,1).[pl4],~magy1.normalize(0,1).[pl4],~magz1.normalize(0,1).[pl4]).rho/(2.sqrt);
-	sph1=Spherical(mag1*mult,~az.[pl4],~el.[pl4]).x;
-	pl4=pl4+1;
-	n1=(sph1).round(1);
-	};
-
-~ny1 = (45*~time).collect{
-	mag2=Cartesian(~magx1.normalize(0,1).[pl5],~magy1.normalize(0,1).[pl5],~magz1.normalize(0,1).[pl5]).rho/(2.sqrt);
-	sph2=Spherical(mag2*mult,~az.[pl5],~el.[pl5]).y;
-	pl5=pl5+1;
-	n2=(sph2).round(1);
-	};
-
-~nz1 = (45*~time).collect{
-	mag3=Cartesian(~magx1.normalize(0,1).[pl6],~magy1.normalize(0,1).[pl6],~magz1.normalize(0,1).[pl6]).rho/(2.sqrt);
-	sph3=Spherical(mag3*mult,~az.[pl6],~el.[pl6]).z;
-	pl6=pl6+1;
-	n3=(sph3).round(1);
-	};
-~nx2 = (45*~time).collect{
-	mag4=Cartesian(~magx2.normalize(0,1).[pl10],~magy2.normalize(0,1).[pl10],~magz2.normalize(0,1).[pl10]).rho/(2.sqrt);
-	sph4=Spherical(mag4*mult,~az.[pl10],~el.[pl10]).x;
-	pl10=pl10+1;
-	n4=(sph4).round(1);
-	};
-
-~ny2 = (45*~time).collect{
-	mag5=Cartesian(~magx2.normalize(0,1).[pl11],~magy2.normalize(0,1).[pl11],~magz2.normalize(0,1).[pl11]).rho/(2.sqrt);
-	sph5=Spherical(mag5*mult,~az.[pl11],~el.[pl11]).y;
-	pl11=pl11+1;
-	n5=(sph5).round(1);
-	};
-
-~nz2 = (45*~time).collect{
-	mag6=Cartesian(~magx2.normalize(0,1).[pl12],~magy2.normalize(0,1).[pl12],~magz2.normalize(0,1).[pl12]).rho/(2.sqrt);
-	sph6=Spherical(mag6*mult,~az.[pl12],~el.[pl12]).z;
-	pl12=pl12+1;
-	n6=(sph6).round(1);
-	};
-~nx3 = (45*~time).collect{
-	mag7=Cartesian(~magx3.normalize(0,1).[pl13],~magy3.normalize(0,1).[pl13],~magz3.normalize(0,1).[pl13]).rho/(2.sqrt);
-	sph7=Spherical(mag7*mult,~az.[pl13],~el.[pl13]).x;
-	pl13=pl13+1;
-	n7=(sph7).round(1);
-	};
-
-~ny3 = (45*~time).collect{
-	mag8=Cartesian(~magx3.normalize(0,1).[pl14],~magy3.normalize(0,1).[pl14],~magz3.normalize(0,1).[pl14]).rho/(2.sqrt);
-	sph8=Spherical(mag8*mult,~az.[pl14],~el.[pl14]).y;
-	pl14=pl14+1;
-	n8=(sph8).round(1);
-	};
-
-~nz3 = (45*~time).collect{
-	mag9=Cartesian(~magx3.normalize(0,1).[pl15],~magy3.normalize(0,1).[pl15],~magz3.normalize(0,1).[pl15]).rho/(2.sqrt);
-	sph9=Spherical(mag9*mult,~az.[pl15],~el.[pl15]).z;
-	pl15=pl15+1;
-	n9=(sph9).round(1);
-	};
-
-
-)
 
 ///////////////////////////wt envelope sine levels
 (
@@ -1127,7 +1025,7 @@ f=Pdef(\6, Pbind(\instrument, \ospace3,
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
 	)
-TempoClock.default.tempo_(1)
+TempoClock.default.tempo_(0.8)
 
 (
 		(
