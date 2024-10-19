@@ -852,9 +852,9 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 		cutt_freq2=(freq*m*ton2).round(0.0000001);
 		cutt_freq3=(freq*m*ton3).round(0.0000001);
 
-		rq1=((sphere.rho.reciprocal)/cutt_freq1).round(0.0000001);
-		rq2=((sphere.rho.reciprocal)/cutt_freq2).round(0.0000001);
-		rq3=((sphere.rho.reciprocal)/cutt_freq3).round(0.0000001);
+		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000001);
+		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000001);
+		rq3=((sphere.rho.reciprocal*10)/cutt_freq3).round(0.0000001);
 
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
@@ -936,9 +936,9 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 		cutt_freq2=(freq*m*ton2).round(0.0000001);
 		cutt_freq3=(freq*m*ton3).round(0.0000001);
 
-		rq1=((sphere.rho.reciprocal)/cutt_freq1).round(0.0000001);
-		rq2=((sphere.rho.reciprocal)/cutt_freq2).round(0.0000001);
-		rq3=((sphere.rho.reciprocal)/cutt_freq3).round(0.0000001);
+		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000001);
+		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000001);
+		rq3=((sphere.rho.reciprocal*10)/cutt_freq3).round(0.0000001);
 
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
@@ -1021,9 +1021,9 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 		cutt_freq2=(freq*m*ton2).round(0.0000001);
 		cutt_freq3=(freq*m*ton3).round(0.0000001);
 
-		rq1=((sphere.rho.reciprocal)/cutt_freq1).round(0.0000001);
-		rq2=((sphere.rho.reciprocal)/cutt_freq2).round(0.0000001);
-		rq3=((sphere.rho.reciprocal)/cutt_freq3).round(0.0000001);
+		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000001);
+		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000001);
+		rq3=((sphere.rho.reciprocal*10)/cutt_freq3).round(0.0000001);
 
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
@@ -1071,7 +1071,7 @@ a=Pdef(\1, Pbind(\instrument, \ospace1,
 		\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-		\octave,Prand([1,2,4,8],inf),
+		\octave,Prand([1,2,4],inf),
 	\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
@@ -1083,7 +1083,7 @@ b=Pdef(\2, Pbind(\instrument, \ospace2,
 			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-			\octave,Prand([1,2,4,8],inf),
+			\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
@@ -1095,7 +1095,7 @@ c=Pdef(\3, Pbind(\instrument, \ospace3,
 			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-			\octave,Prand([1,2,4,8],inf),
+			\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
@@ -1107,7 +1107,7 @@ d=Pdef(\4, Pbind(\instrument, \ospace1,
 			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-			\octave,Prand([1,2,4,8],inf),
+			\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
@@ -1119,7 +1119,7 @@ e=Pdef(\5, Pbind(\instrument, \ospace2,
 			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-		\octave,Prand([1,2,4,8],inf),
+		\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
@@ -1131,7 +1131,7 @@ f=Pdef(\6, Pbind(\instrument, \ospace3,
 			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-		\octave,Prand([1,2,4,8],inf),
+		\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
