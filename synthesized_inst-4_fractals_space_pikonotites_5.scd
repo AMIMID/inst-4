@@ -754,13 +754,13 @@ var ang=0,level,levels,env,pl;
 Env.step(~levels,~levels/60).plot;
 Env(~levels,[0.02222]).plot;
 ////perc
-(
-var ang=0,level,levels,env,pl;
-~levels=90.collect{ level=exp(Complex(0,1)*ang).real; ang=ang+1.degrad;
-	levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/1).degrad).real);};
-~levels=[0]++[0.5]++~levels;
-)
-Env.step(~levels,~levels/60).plot;
+// (
+// var ang=0,level,levels,env,pl;
+// ~levels=90.collect{ level=exp(Complex(0,1)*ang).real; ang=ang+1.degrad;
+// levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/100).degrad).real);};
+// ~levels=[0]++~levels;
+// )
+// Env.step(~levels,~levels/60).plot;
 
 /////////////////////extra radomizer
 
@@ -808,8 +808,8 @@ SynthDef.new(\ospace1, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=128*(speed.reciprocal);
-	var freq,m=1,bank=12,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=32*(speed.reciprocal);
+	var freq,m=1,bank=8,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -846,11 +846,11 @@ mag_o=Cartesian(~magx1.[pl], ~magy1.[pl], ~magz1.[pl]);
 	pitch2=freq*m*ton2;
 	pitch3=freq*m*ton3;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.333);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.01);
 
-		cutt_freq1=(freq*m*ton1*env).round(0.0000001);
-		cutt_freq2=(freq*m*ton2*env).round(0.0000001);
-		cutt_freq3=(freq*m*ton3*env).round(0.0000001);
+		cutt_freq1=(freq*m*ton1).round(0.0000001);
+		cutt_freq2=(freq*m*ton2).round(0.0000001);
+		cutt_freq3=(freq*m*ton3).round(0.0000001);
 
 		rq1=((sphere.rho.reciprocal)/cutt_freq1).round(0.0000001);
 		rq2=((sphere.rho.reciprocal)/cutt_freq2).round(0.0000001);
@@ -892,8 +892,8 @@ SynthDef.new(\ospace2, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=128*(speed.reciprocal);
-	var freq,m=1,bank=12,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=32*(speed.reciprocal);
+	var freq,m=1,bank=8,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -930,11 +930,11 @@ mag_o=Cartesian(~magx2.[pl], ~magy2.[pl], ~magz2.[pl]);
 	pitch2=freq*m*ton2;
 	pitch3=freq*m*ton3;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.333);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.01);
 
-		cutt_freq1=(freq*m*ton1*env).round(0.0000001);
-		cutt_freq2=(freq*m*ton2*env).round(0.0000001);
-		cutt_freq3=(freq*m*ton3*env).round(0.0000001);
+		cutt_freq1=(freq*m*ton1).round(0.0000001);
+		cutt_freq2=(freq*m*ton2).round(0.0000001);
+		cutt_freq3=(freq*m*ton3).round(0.0000001);
 
 		rq1=((sphere.rho.reciprocal)/cutt_freq1).round(0.0000001);
 		rq2=((sphere.rho.reciprocal)/cutt_freq2).round(0.0000001);
@@ -976,8 +976,8 @@ SynthDef.new(\ospace3, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=128*(speed.reciprocal);
-	var freq,m=3,bank=12,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=32*(speed.reciprocal);
+	var freq,m=3,bank=8,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1015,11 +1015,11 @@ mag_o=Cartesian(~magx3.[pl], ~magy3.[pl], ~magz3.[pl]);
 	pitch2=freq*m*ton2;
 	pitch3=freq*m*ton3;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.333);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.01);
 
-		cutt_freq1=(freq*m*ton1*env).round(0.0000001);
-		cutt_freq2=(freq*m*ton2*env).round(0.0000001);
-		cutt_freq3=(freq*m*ton3*env).round(0.0000001);
+		cutt_freq1=(freq*m*ton1).round(0.0000001);
+		cutt_freq2=(freq*m*ton2).round(0.0000001);
+		cutt_freq3=(freq*m*ton3).round(0.0000001);
 
 		rq1=((sphere.rho.reciprocal)/cutt_freq1).round(0.0000001);
 		rq2=((sphere.rho.reciprocal)/cutt_freq2).round(0.0000001);
@@ -1152,7 +1152,7 @@ d.play;
 e.play;
 //s.record(numChannels:4,duration:45)
 f.play;
-s.record(numChannels:4)
+//s.record(numChannels:4)
 );
 
 
