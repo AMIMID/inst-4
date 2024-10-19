@@ -30,7 +30,7 @@ var env,sig,wt,angle=0,level,levels;
 
 	level=exp(Complex(0,1)*angle).imag;
 		angle=angle+1.degrad;
-	levels=level.rrand(exp(Complex(0,1)*angle+((360-(360/1.6180339887499))/10).degrad).imag);
+	levels=level.rrand(exp(Complex(0,1)*angle+((360-(360/1.6180339887499))/5).degrad).imag);
 };
 env = Env(~levels,[1]);
 sig=env.asSignal(1024);
@@ -853,7 +853,7 @@ SynthDef.new(\ospace1, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=64*(speed.reciprocal);
-	var freq,m=1,bank=6,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=1,bank=4,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -937,7 +937,7 @@ SynthDef.new(\ospace2, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=64*(speed.reciprocal);
-	var freq,m=1,bank=6,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=1,bank=4,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1021,7 +1021,7 @@ SynthDef.new(\ospace3, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=64*(speed.reciprocal);
-	var freq,m=3,bank=6,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=3,bank=4,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1106,7 +1106,7 @@ SynthDef.new(\ospace4, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=64*(speed.reciprocal);
-	var freq,m=4,bank=6,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=4,bank=4,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1191,7 +1191,7 @@ SynthDef.new(\ospace5, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=64*(speed.reciprocal);
-	var freq,m=5,bank=6,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=5,bank=4,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1276,7 +1276,7 @@ SynthDef.new(\ospace6, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=64*(speed.reciprocal);
-	var freq,m=6,bank=6,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=6,bank=4,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1407,7 +1407,7 @@ d=Pdef(\4, Pbind(\instrument, \ospace4,
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 			\octave,Prand([1,2,4],inf),
-		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
+		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
 e=Pdef(\5, Pbind(\instrument, \ospace5,
@@ -1419,7 +1419,7 @@ e=Pdef(\5, Pbind(\instrument, \ospace5,
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 		\octave,Prand([1,2,4],inf),
-		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
+		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
 f=Pdef(\6, Pbind(\instrument, \ospace6,
@@ -1431,11 +1431,11 @@ f=Pdef(\6, Pbind(\instrument, \ospace6,
 	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 		\octave,Prand([1,2,4],inf),
-		\rpr,Pseq(~rot_speed.reverse.mirror,inf),
+		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
 	)
-TempoClock.default.tempo_(0.25)
+TempoClock.default.tempo_(0.5)
 
 (
 		(
