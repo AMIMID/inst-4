@@ -695,7 +695,7 @@ rel3=Cartesian(v3.b.round(0.0001),v3.c.round(0.0001),v3.d.round(0.0001)).phi.rou
 )
 /////////////////notes and durs
 (
-var dur=4,ph1,ph2,ph3,ph4,ph5,ph6,pl1=0,pl2=0,pl3=0,pl4=0,pl5=0,pl6=0;
+var dur=2,ph1,ph2,ph3,ph4,ph5,ph6,pl1=0,pl2=0,pl3=0,pl4=0,pl5=0,pl6=0;
 var sph1,sph2,sph3,sph4,sph5,sph6,sph7,sph8,sph9;
 var n1,n2,n3,n4,n5,n6,n7,n8,n9,mult=12;
 var mag1,mag2,mag3,mag4,mag5,mag6,mag7,mag8,mag9,rythm;
@@ -790,7 +790,7 @@ rythm=[1,1/2,1,1,1/2];
 (
 var ang=0,level,levels,env,pl;
 ~levels=180.collect{ level=exp(Complex(0,1)*ang).imag; ang=ang+1.degrad;
-	levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/10).degrad).imag);};
+	levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/100).degrad).imag);};
 )
 Env.step(~levels,~levels/60).plot;
 Env(~levels,[0.02222]).plot;
@@ -832,7 +832,7 @@ Env(~levels,[0.02222]).plot;
 ~magy5=~magy5.normalize(0,1).round(0.0000001);
 ~magz5=~magz5.normalize(0,1).round(0.0000001);
 ~magx6=~magx6.normalize(0,1).round(0.0000001);
-~magy3=~magy6.normalize(0,1).round(0.0000001);
+~magy6=~magy6.normalize(0,1).round(0.0000001);
 ~magz6=~magz6.normalize(0,1).round(0.0000001);
 )
 /////////////////////////////rotations
@@ -858,8 +858,8 @@ SynthDef.new(\ospace1, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=64*(speed.reciprocal);
-	var freq,m=1,bank=8,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=256*(speed.reciprocal);
+	var freq,m=1,bank=6,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -909,20 +909,20 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc2=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch2,mul:amp2,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc3=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch3,mul:amp3,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
 		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
@@ -942,8 +942,8 @@ SynthDef.new(\ospace2, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=64*(speed.reciprocal);
-	var freq,m=1,bank=8,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=256*(speed.reciprocal);
+	var freq,m=1,bank=6,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -993,20 +993,20 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc2=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch2,mul:amp2,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc3=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch3,mul:amp3,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
 		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
@@ -1026,8 +1026,8 @@ SynthDef.new(\ospace3, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=64*(speed.reciprocal);
-	var freq,m=3,bank=8,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=256*(speed.reciprocal);
+	var freq,m=3,bank=6,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1078,20 +1078,20 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc2=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch2,mul:amp2,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc3=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch3,mul:amp3,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
 		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
@@ -1111,8 +1111,8 @@ SynthDef.new(\ospace4, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=64*(speed.reciprocal);
-	var freq,m=4,bank=8,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=256*(speed.reciprocal);
+	var freq,m=4,bank=6,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1163,20 +1163,20 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc2=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch2,mul:amp2,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc3=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch3,mul:amp3,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
 		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
@@ -1196,8 +1196,8 @@ SynthDef.new(\ospace5, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=64*(speed.reciprocal);
-	var freq,m=5,bank=8,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=256*(speed.reciprocal);
+	var freq,m=5,bank=6,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1248,20 +1248,20 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc2=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch2,mul:amp2,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc3=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch3,mul:amp3,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
 		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
@@ -1281,8 +1281,8 @@ SynthDef.new(\ospace6, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=64*(speed.reciprocal);
-	var freq,m=6,bank=8,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=256*(speed.reciprocal);
+	var freq,m=6,bank=6,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -1333,20 +1333,20 @@ env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,
 osc1=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch1,mul:amp1,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc2=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch2,mul:amp2,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc3=VBAP.ar(4,
 LeakDC.ar(Osc.ar(~w.bufnum,pitch3,mul:amp3,phase:phase.theta)),
 ~b.bufnum,
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
 		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
@@ -1441,7 +1441,7 @@ f=Pdef(\6, Pbind(\instrument, \ospace6,
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
 	)
-TempoClock.default.tempo_(1)
+TempoClock.default.tempo_(0.8)
 
 (
 		(
@@ -1457,7 +1457,7 @@ d.play;
 e.play;
 //s.record(numChannels:4,duration:45)
 f.play;
-//s.record(numChannels:4)
+s.record(numChannels:4)
 );
 
 
