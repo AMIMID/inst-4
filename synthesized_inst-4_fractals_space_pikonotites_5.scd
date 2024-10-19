@@ -846,11 +846,11 @@ mag_o=Cartesian(~magx1.[pl], ~magy1.[pl], ~magz1.[pl]);
 	pitch2=freq*m*ton2;
 	pitch3=freq*m*ton3;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.01);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/1);
 
-		cutt_freq1=(freq*m*ton1).round(0.0000001);
-		cutt_freq2=(freq*m*ton2).round(0.0000001);
-		cutt_freq3=(freq*m*ton3).round(0.0000001);
+		cutt_freq1=(freq*m*ton1*env).round(0.0000001);
+		cutt_freq2=(freq*m*ton2*env).round(0.0000001);
+		cutt_freq3=(freq*m*ton3*env).round(0.0000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000001);
@@ -930,11 +930,11 @@ mag_o=Cartesian(~magx2.[pl], ~magy2.[pl], ~magz2.[pl]);
 	pitch2=freq*m*ton2;
 	pitch3=freq*m*ton3;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.01);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/1);
 
-		cutt_freq1=(freq*m*ton1).round(0.0000001);
-		cutt_freq2=(freq*m*ton2).round(0.0000001);
-		cutt_freq3=(freq*m*ton3).round(0.0000001);
+		cutt_freq1=(freq*m*ton1*env).round(0.0000001);
+		cutt_freq2=(freq*m*ton2*env).round(0.0000001);
+		cutt_freq3=(freq*m*ton3*env).round(0.0000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000001);
@@ -1015,11 +1015,11 @@ mag_o=Cartesian(~magx3.[pl], ~magy3.[pl], ~magz3.[pl]);
 	pitch2=freq*m*ton2;
 	pitch3=freq*m*ton3;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:0.01);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/1);
 
-		cutt_freq1=(freq*m*ton1).round(0.0000001);
-		cutt_freq2=(freq*m*ton2).round(0.0000001);
-		cutt_freq3=(freq*m*ton3).round(0.0000001);
+		cutt_freq1=(freq*m*ton1*env).round(0.0000001);
+		cutt_freq2=(freq*m*ton2*env).round(0.0000001);
+		cutt_freq3=(freq*m*ton3*env).round(0.0000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000001);
