@@ -1018,7 +1018,7 @@ f=Pdef(\6, Pbind(\instrument, \ospace1,
 ));
 	)
 TempoClock.default.tempo_(1)
-/////with tempo 1 and time 1 overall duration of a is
+/////with tempo 1 and time 1 overall duration of a is 2.08 min
 (
 		(
 a.play;
