@@ -858,7 +858,7 @@ SynthDef.new(\ospace1, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,pl1=0,pl2=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=128*(speed.reciprocal);
+	var fundamental=64*(speed.reciprocal);
 	var freq,m=1,bank1=2,bank2=18,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
@@ -890,20 +890,20 @@ mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[p
 
 			phase=(exp(Complex(0,1)*(mag_o.theta))*exp(Complex(0,1)*(mag_o.phi)));
 
-	    amp1=ton1.reciprocal;
-		amp2=ton2.reciprocal;
-		amp3=ton3.reciprocal;
+	    amp1=(ton1.reciprocal*speed*octave.reciprocal).round(0.0000000000001);
+		amp2=(ton2.reciprocal*speed*octave.reciprocal).round(0.0000000000001);
+		amp3=(ton3.reciprocal*speed*octave.reciprocal).round(0.0000000000001);
 
-	pitch1=freq*ton1;
-	pitch2=freq*ton2;
-	pitch3=freq*ton3;
+	pitch1=(freq*ton1).round(0.0000000000001);
+	pitch2=(freq*ton2).round(0.0000000000001);
+	pitch3=(freq*ton3).round(0.0000000000001);
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/10);
+env=EnvGen.ar(Env(~levels*sphere.rho,[0.02222],4.neg),doneAction:2,levelScale:1/10);
 	//env=EnvGen.ar(Env.perc(1,4,speed*octave.reciprocal,4.neg),doneAction:2,levelScale:1/10);
 
-		cutt_freq1=(freq*m*ton1).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2).round(0.0000000000001);
-			cutt_freq3=(freq*m*ton3).round(0.0000000000001);
+		cutt_freq1=(freq*ton1*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq2=(freq*ton2*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq3=(freq*ton3*sphere.rho.reciprocal).round(0.0000000000001);
 
 osc1=VBAP.ar(4,
 				LeakDC.ar(Osc.ar(~t.bufnum,pitch1,mul:amp1,phase:phase.theta)),
