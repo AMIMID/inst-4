@@ -20,7 +20,7 @@ Buffer.freeAll
 ~t= Buffer.alloc(s,2048);
 ~a = VBAPSpeakerArray.new(3, [[0, 45], [180, 45], [90, 45.neg], [90.neg, 45.neg]]);
 ~b = Buffer.loadCollection(s, ~a.getSetsAndMatrices);
-~time=2;
+~time=1;
 );
 
 (
@@ -42,8 +42,8 @@ sig.plot;
 (
 var signal,wt,m=0,amp;
 
-~level=90.round(1).collect{m=m+1;amp=m.reciprocal};
-~phase=90.collect{pi};
+~level=45.round(1).collect{m=m+1;amp=m.reciprocal};
+~phase=45.collect{pi};
 signal=Signal.sineFill(1024,~level,~phase);
 
 wt = signal.asWavetable;
@@ -858,7 +858,7 @@ SynthDef.new(\ospace1, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,pl1=0,pl2=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=64*(speed.reciprocal);
+	var fundamental=128*(speed.reciprocal);
 	var freq,m=1,bank1=2,bank2=18,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
@@ -901,9 +901,9 @@ mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[p
 env=EnvGen.ar(Env(~levels*sphere.rho,[0.02222],4.neg),doneAction:2,levelScale:1/10);
 	//env=EnvGen.ar(Env.perc(1,4,speed*octave.reciprocal,4.neg),doneAction:2,levelScale:1/10);
 
-		cutt_freq1=(freq*ton1*sphere.rho.reciprocal).round(0.0000000000001);
-		cutt_freq2=(freq*ton2*sphere.rho.reciprocal).round(0.0000000000001);
-		cutt_freq3=(freq*ton3*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq1=(freq*ton1).round(0.0000000000001);
+		cutt_freq2=(freq*ton2).round(0.0000000000001);
+		cutt_freq3=(freq*ton3).round(0.0000000000001);
 
 osc1=VBAP.ar(4,
 				LeakDC.ar(Osc.ar(~t.bufnum,pitch1,mul:amp1,phase:phase.theta)),
@@ -1018,7 +1018,7 @@ f=Pdef(\6, Pbind(\instrument, \ospace1,
 ));
 	)
 TempoClock.default.tempo_(1)
-
+/////with tempo 1 and time 1 overall duration of a is
 (
 		(
 a.play;
