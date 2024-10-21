@@ -26,13 +26,13 @@ Buffer.freeAll
 (
 var env,sig,wt,angle=0,level,levels;
 
-~levels=360.collect{
+~levelss=360.collect{
 
 	level=exp(Complex(0,1)*angle).imag;
 		angle=angle+1.degrad;
 	levels=level.rrand(exp(Complex(0,1)*angle+((360-(360/1.6180339887499))/5).degrad).imag);
 };
-env = Env(~levels,[1]);
+env = Env(~levelss,[1]);
 sig=env.asSignal(1024);
 wt = sig.asWavetable;
 ~w.loadCollection(wt);

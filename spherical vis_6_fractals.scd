@@ -139,7 +139,7 @@ var az=0,el=0;
 var m=600,sph,az1,el1,pl=0,daz,del,harm,mag,r;
 var r1,harm1,r2,harm2,rad;
 
-data = (360*8).collect{
+data = (360*32).collect{
 
 	az=~az.[pl];
 	el=~el.[pl];
@@ -147,7 +147,7 @@ data = (360*8).collect{
 	mag=Cartesian(~magx.[pl],~magy.[pl],~magz.[pl]).rho/(2.sqrt);
 	pl=pl+1;
 
-	sph=Spherical(mag*1000,az,el).asCartesian.asArray;
+	sph=Spherical(mag*800,az,el).asCartesian.asArray;
 
 
 };

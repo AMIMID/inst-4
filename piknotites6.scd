@@ -26,13 +26,13 @@ Buffer.freeAll
 (
 var env,sig,wt,angle=0,level,levels;
 
-~levels=360.collect{
+~levelss=360.collect{
 
 	level=exp(Complex(0,1)*angle).imag;
 		angle=angle+1.degrad;
 	levels=level.rrand(exp(Complex(0,1)*angle+((360-(360/1.6180339887499))/5).degrad).imag);
 };
-env = Env(~levels,[1]);
+env = Env(~levelss,[1]);
 sig=env.asSignal(1024);
 wt = sig.asWavetable;
 ~w.loadCollection(wt);
@@ -859,7 +859,7 @@ SynthDef.new(\ospace1, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,pl1=0,pl2=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=128*(speed.reciprocal);
-	var freq,m=1,bank1=2,bank2=18,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=2,bank1=2,bank2=18,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -890,20 +890,20 @@ mag_o=Cartesian(~magx_array.[pl2].[pl1], ~magy_array.[pl2].[pl1], ~magz_array.[p
 
 			phase=(exp(Complex(0,1)*(mag_o.theta))*exp(Complex(0,1)*(mag_o.phi)));
 
-	    amp1=(ton1.reciprocal*speed*octave.reciprocal).round(0.0000000000001);
-		amp2=(ton2.reciprocal*speed*octave.reciprocal).round(0.0000000000001);
-		amp3=(ton3.reciprocal*speed*octave.reciprocal).round(0.0000000000001);
+	    amp1=(ton1.reciprocal*speed*octave.reciprocal*m.reciprocal).round(0.0000000000001);
+		amp2=(ton2.reciprocal*speed*octave.reciprocal*m.reciprocal).round(0.0000000000001);
+		amp3=(ton3.reciprocal*speed*octave.reciprocal*m.reciprocal).round(0.0000000000001);
 
-	pitch1=(freq*ton1).round(0.0000000000001);
-	pitch2=(freq*ton2).round(0.0000000000001);
-	pitch3=(freq*ton3).round(0.0000000000001);
+	pitch1=(freq*ton1*m).round(0.0000000000001);
+	pitch2=(freq*ton2*m).round(0.0000000000001);
+	pitch3=(freq*ton3*m).round(0.0000000000001);
 
 env=EnvGen.ar(Env(~levels*sphere.rho,[0.02222],4.neg),doneAction:2,levelScale:1/10);
 	//env=EnvGen.ar(Env.perc(1,4,speed*octave.reciprocal,4.neg),doneAction:2,levelScale:1/10);
 
-		cutt_freq1=(freq*ton1).round(0.0000000000001);
-		cutt_freq2=(freq*ton2).round(0.0000000000001);
-		cutt_freq3=(freq*ton3).round(0.0000000000001);
+		cutt_freq1=(freq*ton1*m).round(0.0000000000001);
+		cutt_freq2=(freq*ton2*m).round(0.0000000000001);
+		cutt_freq3=(freq*ton3*m).round(0.0000000000001);
 
 osc1=VBAP.ar(4,
 				LeakDC.ar(Osc.ar(~t.bufnum,pitch1,mul:amp1,phase:phase.theta)),
@@ -933,6 +933,7 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi
 			pl1=pl1+1;
 	};
 			pl2=pl2+1;
+		m=m+2;
 			};
 }).add;
 );

@@ -14,8 +14,8 @@ s.waitForBoot
 Buffer.freeAll
 
 (
-~c1 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/inst-4/piknotites5/SC_241019_202427.wav");
-~c2 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/recordings from mics/SC_241019_234440.wav");
+~c1 = Buffer.read(s,);
+~c2 = Buffer.read(s,);
 )
 
 (
