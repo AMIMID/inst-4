@@ -892,9 +892,9 @@ mag_o=Cartesian(~magx1.[pl], ~magy1.[pl], ~magz1.[pl]);
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -976,9 +976,9 @@ mag_o=Cartesian(~magx2.[pl], ~magy2.[pl], ~magz2.[pl]);
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1061,9 +1061,9 @@ mag_o=Cartesian(~magx3.[pl], ~magy3.[pl], ~magz3.[pl]);
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1146,9 +1146,9 @@ mag_o=Cartesian(~magx4.[pl], ~magy4.[pl], ~magz4.[pl]);
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1231,9 +1231,9 @@ mag_o=Cartesian(~magx5.[pl], ~magy5.[pl], ~magz5.[pl]);
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1316,9 +1316,9 @@ mag_o=Cartesian(~magx6.[pl], ~magy6.[pl], ~magz6.[pl]);
 
 env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho.reciprocal).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho.reciprocal).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
