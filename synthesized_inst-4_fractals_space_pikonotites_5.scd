@@ -42,7 +42,7 @@ sig.plot;
 (
 var signal,wt,m=0,amp;
 
-~level=90.round(1).collect{m=m+1;amp=m.reciprocal};
+~level=90.round(1).collect{m=m+2;amp=m.reciprocal};
 ~phase=90.collect{pi};
 signal=Signal.sineFill(1024,~level,~phase);
 
@@ -853,7 +853,7 @@ SynthDef.new(\ospace1, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=64*(speed.reciprocal);
-	var freq,m=1,bank=4,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=2,bank=4,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -882,19 +882,19 @@ mag_o=Cartesian(~magx1.[pl], ~magy1.[pl], ~magz1.[pl]);
 
 			phase=(exp(Complex(0,1)*(mag_o.theta))*exp(Complex(0,1)*(mag_o.phi)));
 
-	    amp1=m.reciprocal*ton1.reciprocal*mag_o.x;
-		amp2=m.reciprocal*ton2.reciprocal*mag_o.y;
-		amp3=m.reciprocal*ton3.reciprocal*mag_o.z;
+ amp1=m.reciprocal*ton1.reciprocal*sphere.rho;
+		amp2=m.reciprocal*ton2.reciprocal*sphere.rho;
+		amp3=m.reciprocal*ton3.reciprocal*sphere.rho;
 
-	pitch1=freq*m*ton1*mag_o.x.reciprocal;
-	pitch2=freq*m*ton2*mag_o.y.reciprocal;
-	pitch3=freq*m*ton3*mag_o.z.reciprocal;
+	pitch1=freq*m*ton1*sphere.rho.reciprocal;
+	pitch2=freq*m*ton2*sphere.rho.reciprocal;
+	pitch3=freq*m*ton3*sphere.rho.reciprocal;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/4);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*mag_o.x.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*mag_o.y.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*mag_o.z.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho*env).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho*env).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho*env).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -927,7 +927,7 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
 
 		pl=pl+1;
-		m=m+1;
+		m=m+2;
 	};
 }).add;
 );
@@ -937,7 +937,7 @@ SynthDef.new(\ospace2, {
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
 	var fundamental=64*(speed.reciprocal);
-	var freq,m=1,bank=4,pitch1,pitch2,pitch3,env,gate=1;
+	var freq,m=2,bank=4,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -966,19 +966,18 @@ mag_o=Cartesian(~magx2.[pl], ~magy2.[pl], ~magz2.[pl]);
 
 			phase=(exp(Complex(0,1)*(mag_o.theta))*exp(Complex(0,1)*(mag_o.phi)));
 
-	 amp1=m.reciprocal*ton1.reciprocal*mag_o.x;
-		amp2=m.reciprocal*ton2.reciprocal*mag_o.y;
-		amp3=m.reciprocal*ton3.reciprocal*mag_o.z;
+ amp1=m.reciprocal*ton1.reciprocal*sphere.rho;
+		amp2=m.reciprocal*ton2.reciprocal*sphere.rho;
+		amp3=m.reciprocal*ton3.reciprocal*sphere.rho;
 
-pitch1=freq*m*ton1*mag_o.x.reciprocal;
-	pitch2=freq*m*ton2*mag_o.y.reciprocal;
-	pitch3=freq*m*ton3*mag_o.z.reciprocal;
+	pitch1=freq*m*ton1*sphere.rho.reciprocal;
+	pitch2=freq*m*ton2*sphere.rho.reciprocal;
+	pitch3=freq*m*ton3*sphere.rho.reciprocal;
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/4);
-
-		cutt_freq1=(freq*m*ton1*mag_o.x.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*mag_o.y.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*mag_o.z.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho*env).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho*env).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho*env).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1011,7 +1010,7 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
 
 		pl=pl+1;
-		m=m+1;
+		m=m+2;
 	};
 }).add;
 );
@@ -1051,19 +1050,19 @@ mag_o=Cartesian(~magx3.[pl], ~magy3.[pl], ~magz3.[pl]);
 
 			phase=(exp(Complex(0,1)*(mag_o.theta))*exp(Complex(0,1)*(mag_o.phi)));
 
-		 amp1=m.reciprocal*ton1.reciprocal*mag_o.x;
-		amp2=m.reciprocal*ton2.reciprocal*mag_o.y;
-		amp3=m.reciprocal*ton3.reciprocal*mag_o.z;
+	 amp1=m.reciprocal*ton1.reciprocal*sphere.rho;
+		amp2=m.reciprocal*ton2.reciprocal*sphere.rho;
+		amp3=m.reciprocal*ton3.reciprocal*sphere.rho;
 
-	pitch1=freq*m*ton1*mag_o.x.reciprocal;
-	pitch2=freq*m*ton2*mag_o.y.reciprocal;
-	pitch3=freq*m*ton3*mag_o.z.reciprocal;
+	pitch1=freq*m*ton1*sphere.rho.reciprocal;
+	pitch2=freq*m*ton2*sphere.rho.reciprocal;
+	pitch3=freq*m*ton3*sphere.rho.reciprocal;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/4);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*mag_o.x.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*mag_o.y.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*mag_o.z.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho*env).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho*env).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho*env).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1096,7 +1095,7 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
 
 		pl=pl+1;
-		m=m+1;
+		m=m+2;
 	};
 }).add;
 );
@@ -1136,19 +1135,19 @@ mag_o=Cartesian(~magx4.[pl], ~magy4.[pl], ~magz4.[pl]);
 
 			phase=(exp(Complex(0,1)*(mag_o.theta))*exp(Complex(0,1)*(mag_o.phi)));
 
-		 amp1=m.reciprocal*ton1.reciprocal*mag_o.x;
-		amp2=m.reciprocal*ton2.reciprocal*mag_o.y;
-		amp3=m.reciprocal*ton3.reciprocal*mag_o.z;
+ amp1=m.reciprocal*ton1.reciprocal*sphere.rho;
+		amp2=m.reciprocal*ton2.reciprocal*sphere.rho;
+		amp3=m.reciprocal*ton3.reciprocal*sphere.rho;
 
-	pitch1=freq*m*ton1*mag_o.x.reciprocal;
-	pitch2=freq*m*ton2*mag_o.y.reciprocal;
-	pitch3=freq*m*ton3*mag_o.z.reciprocal;
+	pitch1=freq*m*ton1*sphere.rho.reciprocal;
+	pitch2=freq*m*ton2*sphere.rho.reciprocal;
+	pitch3=freq*m*ton3*sphere.rho.reciprocal;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/4);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*mag_o.x.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*mag_o.y.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*mag_o.z.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho*env).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho*env).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho*env).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1181,7 +1180,7 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
 
 		pl=pl+1;
-		m=m+1;
+		m=m+2;
 	};
 }).add;
 );
@@ -1221,19 +1220,19 @@ mag_o=Cartesian(~magx5.[pl], ~magy5.[pl], ~magz5.[pl]);
 
 			phase=(exp(Complex(0,1)*(mag_o.theta))*exp(Complex(0,1)*(mag_o.phi)));
 
-		 amp1=m.reciprocal*ton1.reciprocal*mag_o.x;
-		amp2=m.reciprocal*ton2.reciprocal*mag_o.y;
-		amp3=m.reciprocal*ton3.reciprocal*mag_o.z;
+		 amp1=m.reciprocal*ton1.reciprocal*sphere.rho;
+		amp2=m.reciprocal*ton2.reciprocal*sphere.rho;
+		amp3=m.reciprocal*ton3.reciprocal*sphere.rho;
 
-	pitch1=freq*m*ton1*mag_o.x.reciprocal;
-	pitch2=freq*m*ton2*mag_o.y.reciprocal;
-	pitch3=freq*m*ton3*mag_o.z.reciprocal;
+	pitch1=freq*m*ton1*sphere.rho.reciprocal;
+	pitch2=freq*m*ton2*sphere.rho.reciprocal;
+	pitch3=freq*m*ton3*sphere.rho.reciprocal;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/4);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*mag_o.x.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*mag_o.y.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*mag_o.z.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho*env).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho*env).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho*env).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1266,7 +1265,7 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
 
 		pl=pl+1;
-		m=m+1;
+		m=m+2;
 	};
 }).add;
 );
@@ -1306,19 +1305,19 @@ mag_o=Cartesian(~magx6.[pl], ~magy6.[pl], ~magz6.[pl]);
 
 			phase=(exp(Complex(0,1)*(mag_o.theta))*exp(Complex(0,1)*(mag_o.phi)));
 
-		amp1=m.reciprocal*ton1.reciprocal*mag_o.x;
-		amp2=m.reciprocal*ton2.reciprocal*mag_o.y;
-		amp3=m.reciprocal*ton3.reciprocal*mag_o.z;
+	 amp1=m.reciprocal*ton1.reciprocal*sphere.rho;
+		amp2=m.reciprocal*ton2.reciprocal*sphere.rho;
+		amp3=m.reciprocal*ton3.reciprocal*sphere.rho;
 
-    pitch1=freq*m*ton1*mag_o.x.reciprocal;
-	pitch2=freq*m*ton2*mag_o.y.reciprocal;
-	pitch3=freq*m*ton3*mag_o.z.reciprocal;
+	pitch1=freq*m*ton1*sphere.rho.reciprocal;
+	pitch2=freq*m*ton2*sphere.rho.reciprocal;
+	pitch3=freq*m*ton3*sphere.rho.reciprocal;
 
-env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1/4);
+env=EnvGen.ar(Env(~levels*speed*octave.reciprocal,[0.02222],4.neg),doneAction:2,levelScale:1);
 
-		cutt_freq1=(freq*m*ton1*mag_o.x.reciprocal*env).round(0.0000000000001);
-		cutt_freq2=(freq*m*ton2*mag_o.y.reciprocal*env).round(0.0000000000001);
-		cutt_freq3=(freq*m*ton3*mag_o.z.reciprocal*env).round(0.0000000000001);
+		cutt_freq1=(freq*m*ton1*sphere.rho*env).round(0.0000000000001);
+		cutt_freq2=(freq*m*ton2*sphere.rho*env).round(0.0000000000001);
+		cutt_freq3=(freq*m*ton3*sphere.rho*env).round(0.0000000000001);
 
 		rq1=((sphere.rho.reciprocal*10)/cutt_freq1).round(0.0000000000001);
 		rq2=((sphere.rho.reciprocal*10)/cutt_freq2).round(0.0000000000001);
@@ -1351,7 +1350,7 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
 
 		pl=pl+1;
-		m=m+1;
+		m=m+2;
 	};
 }).add;
 )
@@ -1435,7 +1434,7 @@ f=Pdef(\6, Pbind(\instrument, \ospace6,
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
 	)
-TempoClock.default.tempo_(0.5)
+TempoClock.default.tempo_(1)
 
 (
 		(
