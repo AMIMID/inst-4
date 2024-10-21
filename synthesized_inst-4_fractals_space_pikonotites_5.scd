@@ -864,9 +864,7 @@ SynthDef.new(\ospace1, {
 	var wrappedOut3 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
-var out1 = NamedControl.kr(\out1, [0, 1, 2, 3]);  // multiple buses!
-	var out2 = NamedControl.kr(\out2, [0, 1, 2, 3]);  // multiple buses!
-	var out3 = NamedControl.kr(\out3, [0, 1, 2, 3]);  // multiple buses!
+var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
 ton1=2.pow(n1/(2*6));
 ton2=2.pow(n2/(2*6));
@@ -919,9 +917,9 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
-		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
-		wrappedOut2.value(out2,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
-		wrappedOut3.value(out3,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
+		wrappedOut1.value(out,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
+		wrappedOut2.value(out,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
+		wrappedOut3.value(out,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
@@ -948,9 +946,7 @@ SynthDef.new(\ospace2, {
 	var wrappedOut3 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
-var out1 = NamedControl.kr(\out1, [0, 1, 2, 3]);  // multiple buses!
-	var out2 = NamedControl.kr(\out2, [0, 1, 2, 3]);  // multiple buses!
-	var out3 = NamedControl.kr(\out3, [0, 1, 2, 3]);  // multiple buses!
+var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
 ton1=2.pow(n1/(2*6));
 ton2=2.pow(n2/(2*6));
@@ -1003,9 +999,9 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
-		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
-		wrappedOut2.value(out2,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
-		wrappedOut3.value(out3,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
+		wrappedOut1.value(out,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
+		wrappedOut2.value(out,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
+		wrappedOut3.value(out,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
@@ -1032,9 +1028,7 @@ SynthDef.new(\ospace3, {
 	var wrappedOut3 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
-var out1 = NamedControl.kr(\out1, [0, 1, 2, 3]);  // multiple buses!
-	var out2 = NamedControl.kr(\out2, [0, 1, 2, 3]);  // multiple buses!
-	var out3 = NamedControl.kr(\out3, [0, 1, 2, 3]);  // multiple buses!
+var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
 
 ton1=2.pow(n1/(2*6));
@@ -1088,9 +1082,9 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
-		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
-		wrappedOut2.value(out2,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
-		wrappedOut3.value(out3,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
+		wrappedOut1.value(out,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
+		wrappedOut2.value(out,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
+		wrappedOut3.value(out,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
@@ -1117,9 +1111,7 @@ SynthDef.new(\ospace4, {
 	var wrappedOut3 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
-var out1 = NamedControl.kr(\out1, [0, 1, 2, 3]);  // multiple buses!
-	var out2 = NamedControl.kr(\out2, [0, 1, 2, 3]);  // multiple buses!
-	var out3 = NamedControl.kr(\out3, [0, 1, 2, 3]);  // multiple buses!
+var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
 
 ton1=2.pow(n1/(2*6));
@@ -1173,9 +1165,9 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
-		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
-		wrappedOut2.value(out2,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
-		wrappedOut3.value(out3,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
+		wrappedOut1.value(out,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
+		wrappedOut2.value(out,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
+		wrappedOut3.value(out,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
@@ -1202,9 +1194,7 @@ SynthDef.new(\ospace5, {
 	var wrappedOut3 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
-var out1 = NamedControl.kr(\out1, [0, 1, 2, 3]);  // multiple buses!
-	var out2 = NamedControl.kr(\out2, [0, 1, 2, 3]);  // multiple buses!
-	var out3 = NamedControl.kr(\out3, [0, 1, 2, 3]);  // multiple buses!
+var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
 
 ton1=2.pow(n1/(2*6));
@@ -1258,9 +1248,9 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
-		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
-		wrappedOut2.value(out2,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
-		wrappedOut3.value(out3,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
+		wrappedOut1.value(out,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
+		wrappedOut2.value(out,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
+		wrappedOut3.value(out,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
@@ -1287,9 +1277,7 @@ SynthDef.new(\ospace6, {
 	var wrappedOut3 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
 		Out.ar(pair[0], pair[1])}};
-var out1 = NamedControl.kr(\out1, [0, 1, 2, 3]);  // multiple buses!
-	var out2 = NamedControl.kr(\out2, [0, 1, 2, 3]);  // multiple buses!
-	var out3 = NamedControl.kr(\out3, [0, 1, 2, 3]);  // multiple buses!
+var out = NamedControl.kr(\out, [0, 1, 2, 3]);  // multiple buses!
 
 
 ton1=2.pow(n1/(2*6));
@@ -1342,9 +1330,9 @@ Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:
 Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
-		wrappedOut1.value(out1,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
-		wrappedOut2.value(out2,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
-		wrappedOut3.value(out3,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
+		wrappedOut1.value(out,LeakDC.ar((BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq1.sqrt)))));
+		wrappedOut2.value(out,LeakDC.ar((BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq2.sqrt)))));
+		wrappedOut3.value(out,LeakDC.ar((BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq3.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc1,cutt_freq1,rq1,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc2,cutt_freq2,rq2,env*(1/rq.sqrt)))));
 		//Out.ar(0,LeakDC.ar(LeakDC.ar(BPF.ar(osc3,cutt_freq3,rq3,env*(1/rq.sqrt)))));
@@ -1366,9 +1354,7 @@ a=Pdef(\1, Pbind(\instrument, \ospace1,
 \n1,PdegreeToKey(Pseq(~nx.mirror,inf),Scale.major),
 	\n2,PdegreeToKey(Pseq(~ny.mirror,inf),Scale.major),
 	\n3,PdegreeToKey(Pseq(~nz.mirror,inf),Scale.major),
-		\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+	\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 		\octave,Prand([1,2,4],inf),
 	\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
@@ -1378,9 +1364,7 @@ b=Pdef(\2, Pbind(\instrument, \ospace2,
 \n1,PdegreeToKey(Pseq(~nx.mirror,inf),Scale.major),
 	\n2,PdegreeToKey(Pseq(~ny.mirror,inf),Scale.major),
 	\n3,PdegreeToKey(Pseq(~nz.mirror,inf),Scale.major),
-			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+			\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 			\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
@@ -1390,9 +1374,7 @@ c=Pdef(\3, Pbind(\instrument, \ospace3,
 \n1,PdegreeToKey(Pseq(~nx.mirror,inf),Scale.major),
 	\n2,PdegreeToKey(Pseq(~ny.mirror,inf),Scale.major),
 	\n3,PdegreeToKey(Pseq(~nz.mirror,inf),Scale.major),
-			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+	\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 			\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
@@ -1402,9 +1384,7 @@ d=Pdef(\4, Pbind(\instrument, \ospace4,
 \n1,PdegreeToKey(Pseq(~nx.mirror,inf),Scale.major),
 	\n2,PdegreeToKey(Pseq(~ny.mirror,inf),Scale.major),
 	\n3,PdegreeToKey(Pseq(~nz.mirror,inf),Scale.major),
-			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+	\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 			\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
@@ -1414,9 +1394,7 @@ e=Pdef(\5, Pbind(\instrument, \ospace5,
 \n1,PdegreeToKey(Pseq(~nx.mirror,inf),Scale.major),
 	\n2,PdegreeToKey(Pseq(~ny.mirror,inf),Scale.major),
 	\n3,PdegreeToKey(Pseq(~nz.mirror,inf),Scale.major),
-			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+	\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 		\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
@@ -1426,9 +1404,7 @@ f=Pdef(\6, Pbind(\instrument, \ospace6,
 \n1,PdegreeToKey(Pseq(~nx.mirror,inf),Scale.major),
 	\n2,PdegreeToKey(Pseq(~ny.mirror,inf),Scale.major),
 	\n3,PdegreeToKey(Pseq(~nz.mirror,inf),Scale.major),
-			\out1,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out2,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\out3,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
 		\octave,Prand([1,2,4],inf),
 		\rpr,Pseq(~rot_speed.mirror,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
