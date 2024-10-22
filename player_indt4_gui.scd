@@ -14,8 +14,8 @@ s.waitForBoot
 Buffer.freeAll
 
 (
-~c1 = Buffer.read(s,);
-~c2 = Buffer.read(s,);
+~c1 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/inst-4/piknotites6/SC_241021_155200.wav");
+~c2 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/recordings from mics/SC_241021_162142.wav");
 )
 
 (
@@ -144,6 +144,7 @@ f.string = "reverb2";
 )
 s.record(numChannels:4)
 
+/////use joysticks for slider 2d and slider pots or normal pots for gain and reverb, a tact switch can be the on/off button
 (
 MIDIClient.init;
 MIDIIn.connectAll;

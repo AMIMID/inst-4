@@ -62,8 +62,7 @@ sig.plot;
 ~b = Buffer.loadCollection(s, ~a.getSetsAndMatrices);
 )*/
 
-/////////////////////////////////////////////arrays
-///////fractal
+//////////////////////wavetable
 		{
 var signal,wt,m=0,amp;
 
@@ -75,6 +74,8 @@ wt = signal.asWavetable;
 ~t.loadCollection(wt);
 //signal.plot;
 		}.value;
+///////////////////////////////////////////////////////arrays
+///////fractal
 		~time=1;
 {
 var c,cc,angle=0,c_real,c_imag,z;

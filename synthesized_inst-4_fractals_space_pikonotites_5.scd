@@ -16,42 +16,14 @@ s.waitForBoot
 Buffer.freeAll
 
 (
+(
 ~w= Buffer.alloc(s,2048);
 ~t= Buffer.alloc(s,2048);
 ~a = VBAPSpeakerArray.new(3, [[0, 45], [180, 45], [90, 45.neg], [90.neg, 45.neg]]);
 ~b = Buffer.loadCollection(s, ~a.getSetsAndMatrices);
-~time=2;
 );
 
-(
-var env,sig,wt,angle=0,level,levels;
-
-~levelss=360.collect{
-
-	level=exp(Complex(0,1)*angle).imag;
-		angle=angle+1.degrad;
-	levels=level.rrand(exp(Complex(0,1)*angle+((360-(360/1.6180339887499))/5).degrad).imag);
-};
-env = Env(~levelss,[1]);
-sig=env.asSignal(1024);
-wt = sig.asWavetable;
-~w.loadCollection(wt);
-sig.plot;
-);
-
-(
-var signal,wt,m=0,amp;
-
-~level=90.round(1).collect{m=m+2;amp=m.reciprocal};
-~phase=90.collect{pi};
-signal=Signal.sineFill(1024,~level,~phase);
-
-wt = signal.asWavetable;
-~t.loadCollection(wt);
-//signal.plot;
-)
-
-////speaker setup
+////////////////////////////////////speaker setup///other
 /*(
 // 3D///cube
 ~a = VBAPSpeakerArray.new(3, [[45, 45], [135, 45], [135.neg, 45], [45.neg, 45],[45, 45.neg], [135, 45.neg], [135.neg, 45.neg], [45.neg, 45.neg]]);
@@ -73,13 +45,39 @@ wt = signal.asWavetable;
 ~b = Buffer.loadCollection(s, ~a.getSetsAndMatrices);
 )*/
 
-//////////arrays
-///fractal
-(
+//////////////wavetables
+		{
+var signal,wt,m=0,amp;
+
+~level=45.round(1).collect{m=m+1;amp=m.reciprocal};
+~phase=45.collect{pi};
+signal=Signal.sineFill(1024,~level,~phase);
+
+wt = signal.asWavetable;
+~t.loadCollection(wt);
+//signal.plot;
+		}.value;
+{
+var env,sig,wt,angle=0,level,levels;
+
+~levelss=360.collect{
+
+	level=exp(Complex(0,1)*angle).imag;
+		angle=angle+1.degrad;
+	levels=level.rrand(exp(Complex(0,1)*angle+((360-(360/1.6180339887499))/5).degrad).imag);
+};
+env = Env(~levelss,[1]);
+sig=env.asSignal(1024);
+wt = sig.asWavetable;
+~w.loadCollection(wt);
+//sig.plot;
+}.value
+/////////////////////////////////////////////arrays
+///////fractal
+		~time=1;
+{
 var c,cc,angle=0,c_real,c_imag,z;
 var c1,cc1,angle1=0,c_real1,c_imag1,z1;
-
-
 
 ~c = 5.collect{
  	c_real=exp(Complex(0,1)*angle.degrad).real;
@@ -111,10 +109,10 @@ z1=Complex(0,0);
 
 }
 
-)
-//////////////////////basis
+		}.value;
+//////////////////////////////////////////////////basis
+{
 
-(
 var  sph1,sph2,m_x=3,m_y=2,m_z=1,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
@@ -193,9 +191,9 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 	mag_z.round(0.0000000000001);
 	};
 
-)
+		}.value;
 
-(
+{
 var  sph1,sph2,m_x=1,m_y=1,m_z=1,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
@@ -252,9 +250,9 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 	mag_z.round(0.0000000000001);
 	};
 
-)
+		}.value;
 
-(
+{
 var  sph1,sph2,m_x=2,m_y=2,m_z=2,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
@@ -312,9 +310,9 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 	mag_z.round(0.0000000000001);
 	};
 
-)
+}.value;
 
-(
+{
 var  sph1,sph2,m_x=3,m_y=3,m_z=3,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
@@ -372,9 +370,9 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 	mag_z.round(0.0000000000001);
 	};
 
-)
+}.value;
 
-(
+{
 var  sph1,sph2,m_x=4,m_y=4,m_z=4,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
@@ -432,9 +430,9 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 	mag_z.round(0.0000000000001);
 	};
 
-)
+}.value;
 
-(
+{
 var  sph1,sph2,m_x=5,m_y=5,m_z=5,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
@@ -492,9 +490,9 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 	mag_z.round(0.0000000000001);
 	};
 
-)
+}.value;
 
-(
+{
 var  sph1,sph2,m_x=6,m_y=6,m_z=6,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
@@ -552,12 +550,10 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 	mag_z.round(0.0000000000001);
 	};
 
-)
+}.value;
+///////////////////////////////////////az///randomizer-difuser
 
-
-////////////////////////az///randomizer-difuser
-
-(
+{
 var pl1=0,az1,el1,sph1,rot1,i1,j1,k1,q1,raz1,rel1;
 var pl2=0,az2,el2,sph2,rot2,i2,j2,k2,q2,raz2,rel2;
 var pl3=0,az3,el3,sph3,rot3,i3,j3,k3,q3,raz3,rel3;
@@ -620,11 +616,9 @@ v3=q3*v3*q3.conjugate;
 raz3=Cartesian(v3.b.round(0.0001),v3.c.round(0.0001),v3.d.round(0.0001)).theta.round(0.0000000000001);
 };
 
-)
-
-
+}.value;
 ///////////////////////el
-(
+{
 var pl1=0,az1,el1,sph1,rot1,i1,j1,k1,q1,raz1,rel1;
 var pl2=0,az2,el2,sph2,rot2,i2,j2,k2,q2,raz2,rel2;
 var pl3=0,az3,el3,sph3,rot3,i3,j3,k3,q3,raz3,rel3;
@@ -686,7 +680,7 @@ v3=q3*v3*q3.conjugate;
 rel3=Cartesian(v3.b.round(0.0001),v3.c.round(0.0001),v3.d.round(0.0001)).phi.round(0.0000000000001);
 };
 
-)
+	}.value;
 //////////////////////////////////////////////////space
 (
 ~magx1=(~magx1/(2.sqrt)).round(0.0000000000001);
@@ -707,9 +701,13 @@ rel3=Cartesian(v3.b.round(0.0001),v3.c.round(0.0001),v3.d.round(0.0001)).phi.rou
 ~magx6=(~magx6/(2.sqrt)).round(0.0000000000001);
 ~magy6=(~magy6/(2.sqrt)).round(0.0000000000001);
 ~magz6=(~magz6/(2.sqrt)).round(0.0000000000001);
-)
-/////////////////notes and durs
-(
+
+~magx_array=[~magx1.round(0.00001),~magx2.round(0.00001),~magx3.round(0.00001),~magx4.round(0.00001),~magx5.round(0.00001)];
+~magy_array=[~magy1.round(0.00001),~magy2.round(0.00001),~magy3.round(0.00001),~magy4.round(0.00001),~magy5.round(0.00001)];
+~magz_array=[~magz1.round(0.00001),~magz2.round(0.00001),~magz3.round(0.00001),~magz4.round(0.00001),~magz5.round(0.00001)];
+);
+////////////////////////////////////////////////////////notes and durs
+{
 var dur=2,ph1,ph2,ph3,ph4,ph5,ph6,pl1=0,pl2=0,pl3=0,pl4=0,pl5=0,pl6=0;
 var sph1,sph2,sph3,sph4,sph5,sph6,sph7,sph8,sph9;
 var n1,n2,n3,n4,n5,n6,n7,n8,n9,mult=12;
@@ -717,8 +715,8 @@ var mag1,mag2,mag3,mag4,mag5,mag6,mag7,mag8,mag9,rythm;
 var index1,index2,index3,index4,index5,index6,pl7=0,pl8=0,pl9=0,t1,t2,t3,t4,t5,t6;
 var pl10=0,pl11=0,pl12=0,pl13=0,pl14=0,pl15=0;
 
-////L-system algae variable a,b rules:a=ab b=a , n3 for n0=a
-rythm=[1,1/2,1,1,1/2];
+///////////////////////L-system algae variable a,b rules:a=ab b=a , n3 for n0=a
+rythm=[1,1/1,1,1,1/1];
 
 ~dur1 = (45*~time).collect{
 	ph1=Cartesian(~magx1.[pl1],~magy1.[pl1],~magz1.[pl1]).rho/(2.sqrt);
@@ -781,7 +779,7 @@ rythm=[1,1/2,1,1,1/2];
 	mag1=1;
 	sph1=Spherical(mag1*mult,~az.[pl4],~el.[pl4]).x;
 	pl4=pl4+1;
-	n1=(sph1).round(1);
+	n1=(sph1).round(0.000000001);
 	};
 
 ~ny = (45*~time).collect{
@@ -789,7 +787,7 @@ rythm=[1,1/2,1,1,1/2];
 	mag2=1;
 	sph2=Spherical(mag2*mult,~az.[pl5],~el.[pl5]).y;
 	pl5=pl5+1;
-	n2=(sph2).round(1);
+	n2=(sph2).round(0.000000001);
 	};
 
 ~nz = (45*~time).collect{
@@ -797,40 +795,30 @@ rythm=[1,1/2,1,1,1/2];
 	mag3=1;
 	sph3=Spherical(mag3*mult,~az.[pl6],~el.[pl6]).z;
 	pl6=pl6+1;
-	n3=(sph3).round(1);
+	n3=(sph3).round(0.000000001);
 };
-)
+}.value;
 
-///////////////////////////wt envelope sine levels
-(
-var ang=0,level,levels,env,pl;
-~levels=180.collect{ level=exp(Complex(0,1)*ang).imag; ang=ang+1.degrad;
-	levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/100).degrad).imag);};
-)
-Env.step(~levels,~levels/60).plot;
-Env(~levels,[0.02222]).plot;
-////perc
-// (
-// var ang=0,level,levels,env,pl;
-// ~levels=90.collect{ level=exp(Complex(0,1)*ang).real; ang=ang+1.degrad;
-// levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/100).degrad).real);};
-// ~levels=[0]++~levels;
-// )
-// Env.step(~levels,~levels/60).plot;
+/////////////////////////////////////////////wt envelope sine levels
+	// (
+	// 	var ang=0,level,levels,env,pl;
+	// 	~levels=180.collect{ level=exp(Complex(0,1)*ang).imag; ang=ang+1.degrad;
+	// 	levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/10).degrad).imag);};
+	// )
 
-/////////////////////extra radomizer
+//Env(~levels,[0.02222]).plot;
+////////////////////////////////////perc
+{
+ var ang=0,level,levels,env,pl;
+ ~levels=90.collect{ level=exp(Complex(0,1)*ang).real; ang=ang+1.degrad;
+ levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/100).degrad).real);};
+ ~levels=[0]++~levels;
+	}.value;
+//Env(~levels,[0.04444]).plot;
 
-// (
-// ~az_x=~az_x.scramble;
-// ~az_y=~az_y.scramble;
-// ~az_z=~az_z.scramble;
-// ~el_x=~el_x.scramble;
-// ~el_y=~el_y.scramble;
-// ~el_z=~el_z.scramble;
-// )
 
-/////////////////////////////rotations
-(
+////////////////////////////////////////rotations
+{
 var freq=1,ph1,ph2,ph3,pl1=0,pl2=0,pl3=0,pl4=0,pl5=0,pl6=0,sph1,sph2,sph3,n1,n2,n3;
 var mag1,mag2,mag3,rythm,index1,index2,index3,pl7=0,pl8=0,pl9=0,t1,t2,t3;
 
@@ -842,8 +830,9 @@ var mag1,mag2,mag3,rythm,index1,index2,index3,pl7=0,pl8=0,pl9=0,t1,t2,t3;
 
 	};
 
-)
+}.value;
 ~rot_speed=~rot_speed.scramble;
+	)
 
 /////synths////
 (
