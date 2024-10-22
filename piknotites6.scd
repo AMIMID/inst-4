@@ -1,4 +1,5 @@
-
+(
+Server.default = s = Server.local;
 ////server setup
 (
 s.options.numWireBufs = 1024*4;
@@ -9,9 +10,9 @@ s.options.memSize = 8192*8;
 s.options.blockSize = 64;
 s.options.maxNodes = 1024 * 16;
 s.options.sampleRate= 48000;
-s.waitForBoot
 )
 
+s.waitForBoot{
 /////wavetables
 Buffer.freeAll
 
@@ -920,9 +921,7 @@ Osc.ar(~t.bufnum,rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:
 }).add;
 );
 
-)
-/////////////////////scales
-Scale.directory
+);
 
 //////////pattern for mobius strib of sequential or parallel play of directions
 
@@ -1005,28 +1004,13 @@ f=Pdef(\6, Pbind(\instrument, \ospace1,
 	\decay,Pbrown(0.01111,0.04444,0.01111,inf),
 	\speed,Prand([1,3/4,2/3,1/2],inf);
 ));
-	)
-TempoClock.default.tempo_(1)
+	);
+TempoClock.default.tempo_(1);
 /////with tempo 1 and time 1 overall duration of a is 2.08 min
-(
-		(
-a.play;
+
 //s.record(numChannels:4);
-b.play;
-//s.record(numChannels:4)
-c.play;
-//s.record(numChannels:4)
-);
-d.play;
-//s.record(numChannels:4,duration:45)
-e.play;
-//s.record(numChannels:4,duration:45)
-f.play;
-s.record(numChannels:4)
-);
-
-s.record(numChannels:4);
-
+	/////////////////////scales
+Scale.directory;
 
 (
 Tdef.new(\h,{
@@ -1047,99 +1031,67 @@ f.play;
 )
 
 
-Tdef(\h).stop;
+//Tdef(\h).stop;
 Tdef(\h).play;
-Tdef(\h).clear;
+//Tdef(\h).clear;
 
 ////////////////pattern for web of directions////////need correction
-(
-~phase2=~phase2.mirror;
-~n2=~n2.mirror.mirror;
-~phase3=~phase3.mirror
-~n3=~n3.mirror;
-~phase4=~phase4.mirror;
-~n4=~n4.mirror;
+	// (
+	// 	~phase2=~phase2.mirror;
+	// 	~n2=~n2.mirror.mirror;
+	// 	~phase3=~phase3.mirror
+	// 	~n3=~n3.mirror;
+	// 	~phase4=~phase4.mirror;
+	// 	~n4=~n4.mirror;
+	//
+	// 	~phase22=~phase2.reverse.mirror;
+	// 	~n22=~n2.reverse.mirror;
+	// 	~phase33=~phase3.reverse.mirror;
+	// 	~n33=~n3.reverse.mirror;
+	// 	~phase44=~phase4.reverse.mirror;
+	// 	~n44=~n4++~n4.reverse.mirror;
+	//
+	// 	~azz=~az.mirror;
+	// 	~ell=~el.mirror;
+	// 	~azzz=~az.reverse.mirror;
+	// 	~azzz=~az.reverse.mirror;
+	//
+	// 	~magxx=~magx.mirror;
+	// 	~magyy=~magy.mirror;
+	// 	~magzz=~magz.mirror;
+	// 	~magxxx=~magx.reverse.mirror;
+	// 	~magyyy=~magy.reverse.mirror;
+	// 	~magzzz=~magz.reverse.mirror;
+	//
+	// )
+	// (
+	// 	b=Pdef(\2, Pbind(\instrument, \ob,
+	// 		\dur,Ppatlace([Pseq(~phase2,1),Pseq(~phase22,1)],inf),
+	// 		\n1,PdegreeToKey(Ppatlace([Pseq(~n2,inf),Pseq(~n22,inf)],inf),Scale.phrygian),
+	// 		\pl,Prand(Array.fill(180,{arg i; i=i+1}),inf),
+	// 		\cutt,Pbrown(220*2,220*8,100,inf),
+	// 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+	// 		\decay,Pbrown(2,8,1,inf);
+	// 	));
+	// 	c=Pdef(\3, Pbind(\instrument, \oc,
+	// 		\dur,Ppatlace([Pseq(~phase3,1),Pseq(~phase33,1)],inf),
+	// 		\n1,PdegreeToKey(Ppatlace([Pseq(~n3,inf),Pseq(~n33,inf)],inf),Scale.phrygian),
+	// 		\pl,Prand(Array.fill(180,{arg i; i=i+1}),inf),
+	// 		\cutt,Pbrown(220*2,220*8,100,inf),
+	// 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+	// 		\decay,Pbrown(2,8,1,inf);
+	// 	));
+	// 	d=Pdef(\4, Pbind(\instrument, \od,
+	// 		\dur,Ppatlace([Pseq(~phase4,1),Pseq(~phase44,1)],inf),
+	// 		\n1,PdegreeToKey(Ppatlace([Pseq(~n4,inf),Pseq(~n44,inf)],inf),Scale.phrygian),
+	// 		\pl,Prand(Array.fill(180,{arg i; i=i+1}),inf),
+	// 		\cutt,Pbrown(220*2,220*8,100,inf),
+	// 		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
+	// 		\decay,Pbrown(2,8,1,inf);
+	// 	));
+	// )
 
-~phase22=~phase2.reverse.mirror;
-~n22=~n2.reverse.mirror;
-~phase33=~phase3.reverse.mirror;
-~n33=~n3.reverse.mirror;
-~phase44=~phase4.reverse.mirror;
-~n44=~n4++~n4.reverse.mirror;
 
-~azz=~az.mirror;
-~ell=~el.mirror;
-~azzz=~az.reverse.mirror;
-~azzz=~az.reverse.mirror;
-
-~magxx=~magx.mirror;
-~magyy=~magy.mirror;
-~magzz=~magz.mirror;
-~magxxx=~magx.reverse.mirror;
-~magyyy=~magy.reverse.mirror;
-~magzzz=~magz.reverse.mirror;
-
-)
-(
-b=Pdef(\2, Pbind(\instrument, \ob,
-	\dur,Ppatlace([Pseq(~phase2,1),Pseq(~phase22,1)],inf),
-	\n1,PdegreeToKey(Ppatlace([Pseq(~n2,inf),Pseq(~n22,inf)],inf),Scale.phrygian),
-\pl,Prand(Array.fill(180,{arg i; i=i+1}),inf),
-	\cutt,Pbrown(220*2,220*8,100,inf),
-		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\decay,Pbrown(2,8,1,inf);
-));
-c=Pdef(\3, Pbind(\instrument, \oc,
-	\dur,Ppatlace([Pseq(~phase3,1),Pseq(~phase33,1)],inf),
-	\n1,PdegreeToKey(Ppatlace([Pseq(~n3,inf),Pseq(~n33,inf)],inf),Scale.phrygian),
-\pl,Prand(Array.fill(180,{arg i; i=i+1}),inf),
-	\cutt,Pbrown(220*2,220*8,100,inf),
-		\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\decay,Pbrown(2,8,1,inf);
-));
-d=Pdef(\4, Pbind(\instrument, \od,
-	\dur,Ppatlace([Pseq(~phase4,1),Pseq(~phase44,1)],inf),
-	\n1,PdegreeToKey(Ppatlace([Pseq(~n4,inf),Pseq(~n44,inf)],inf),Scale.phrygian),
-\pl,Prand(Array.fill(180,{arg i; i=i+1}),inf),
-	\cutt,Pbrown(220*2,220*8,100,inf),
-	\out,Pn(Pshuf([0, 1, 2, 3], 1), inf).clump(4).collect([_]),
-	\decay,Pbrown(2,8,1,inf);
-));
-)
-
-
-(
-b.play;
 //s.record(numChannels:4)
-//)
-//(
-c.play;
-//s.record(numChannels:4)
-//)
-//(
-d.play;
-s.record(numChannels:4)
+}
 )
-
-////////////////////////////////////task
-
-(
-Tdef.new(\h,{loop({
-
-	b.play;
-c.play;
-d.play;
-	(1).wait;
-		bb.play;
-cc.play;
-dd.play;
-
-
-	}
-)})
-)
-
-
-Tdef(\h).stop;
-Tdef(\h).play;
-Tdef(\h).clear;
