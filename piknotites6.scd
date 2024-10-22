@@ -255,7 +255,7 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 		}.value;
 
 {
-var  sph1,sph2,m_x=2,m_y=2,m_z=2,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
+var  sph1,sph2,m_x=2,m_y=1,m_z=2,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
 
@@ -315,7 +315,7 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 }.value;
 
 {
-var  sph1,sph2,m_x=3,m_y=3,m_z=3,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
+var  sph1,sph2,m_x=3,m_y=1,m_z=3,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
 
@@ -375,7 +375,7 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 }.value;
 
 {
-var  sph1,sph2,m_x=4,m_y=4,m_z=4,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
+var  sph1,sph2,m_x=4,m_y=1,m_z=4,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
 
@@ -435,7 +435,7 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 }.value;
 
 {
-var  sph1,sph2,m_x=5,m_y=5,m_z=5,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
+var  sph1,sph2,m_x=5,m_y=1,m_z=5,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
 
@@ -495,7 +495,7 @@ mag_z=Complex(sin((sphz.phi.round(0.0000000000001)*m_z).wrap((pi/2).neg,(pi/2)))
 }.value;
 
 {
-var  sph1,sph2,m_x=6,m_y=6,m_z=6,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
+var  sph1,sph2,m_x=6,m_y=1,m_z=6,az1=0,el1=0,az2=0,el2=0,mag_x,mag_y,mag_z;
 var azx=0,elx=0,azy=0,ely=0,azz=0,elz=0,sphx,sphy,sphz,rad=1;
 var pl1=0,pl2=0,pl3=0,pl4=0,pl5=0;
 
@@ -781,7 +781,7 @@ rythm=[1,1/1,1,1,1/1];
 	mag1=1;
 	sph1=Spherical(mag1*mult,~az.[pl4],~el.[pl4]).x;
 	pl4=pl4+1;
-	n1=(sph1).round(0.000000001);
+	n1=(sph1).round(1);
 	};
 
 ~ny = (45*~time).collect{
@@ -789,7 +789,7 @@ rythm=[1,1/1,1,1,1/1];
 	mag2=1;
 	sph2=Spherical(mag2*mult,~az.[pl5],~el.[pl5]).y;
 	pl5=pl5+1;
-	n2=(sph2).round(0.000000001);
+	n2=(sph2).round(1);
 	};
 
 ~nz = (45*~time).collect{
@@ -797,25 +797,25 @@ rythm=[1,1/1,1,1,1/1];
 	mag3=1;
 	sph3=Spherical(mag3*mult,~az.[pl6],~el.[pl6]).z;
 	pl6=pl6+1;
-	n3=(sph3).round(0.000000001);
+	n3=(sph3).round(1);
 };
 }.value;
 
 /////////////////////////////////////////////wt envelope sine levels
-	// (
-	// 	var ang=0,level,levels,env,pl;
-	// 	~levels=180.collect{ level=exp(Complex(0,1)*ang).imag; ang=ang+1.degrad;
-	// 	levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/10).degrad).imag);};
-	// )
+ {
+	 	var ang=0,level,levels,env,pl;
+	 	~levels=180.collect{ level=exp(Complex(0,1)*ang).imag; ang=ang+1.degrad;
+	 	levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/100).degrad).imag);};
+	 }.value;
 
-//Env(~levels,[0.02222]).plot;
+Env(~levels,[0.02222]).plot;
 ////////////////////////////////////perc
-{
- var ang=0,level,levels,env,pl;
- ~levels=90.collect{ level=exp(Complex(0,1)*ang).real; ang=ang+1.degrad;
- levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/100).degrad).real);};
- ~levels=[0]++~levels;
-	}.value;
+		// {
+		// 	var ang=0,level,levels,env,pl;
+		// 	~levels=90.collect{ level=exp(Complex(0,1)*ang).real; ang=ang+1.degrad;
+		// 	levels=level.rrand(exp(Complex(0,1)*ang+((360-(360/1.6180339887499))/100).degrad).real);};
+		// 	~levels=[0]++~levels;
+		// }.value;
 //Env(~levels,[0.04444]).plot;
 
 
@@ -843,8 +843,8 @@ SynthDef.new(\ospace1, {
 	arg  n1=1,n2=1,n3=1,fund=55,octave=2,cutt=10,rpr=1,speed=10,decay=0.04444;
 	var phase,osc1,osc2,osc3,sphere,mag_o,amp1,amp2,amp3;
 	var ton1,ton2,ton3,pl=0,pl1=0,pl2=0,rq1=1,rq2=1,rq3=1,cutt_freq1=1,cutt_freq2=1,cutt_freq3=1;
-	var fundamental=64*(speed.reciprocal);
-	var freq,m=2,bank1=2,bank2=6,pitch1,pitch2,pitch3,env,gate=1;
+	var fundamental=32*(speed.reciprocal);
+	var freq,m=2,bank1=2,bank2=8,pitch1,pitch2,pitch3,env,gate=1;
 
 	var wrappedOut1 = { |busArray, signalArray|
 	[busArray, signalArray].flop.do { |pair|
@@ -883,7 +883,7 @@ phase=2pi;
 	pitch2=(freq*ton2*m).round(0.0000000000001);
 	pitch3=(freq*ton3*m).round(0.0000000000001);
 
-env=EnvGen.ar(Env(~levels,[decay],4.neg),doneAction:2,levelScale:1/10);
+env=EnvGen.ar(Env(~levels*sphere.rho,[decay],4.neg),doneAction:2,levelScale:1/10);
 
 		cutt_freq1=(freq*ton1*m).round(0.0000000000001);
 		cutt_freq2=(freq*ton2*m).round(0.0000000000001);
@@ -892,20 +892,20 @@ env=EnvGen.ar(Env(~levels,[decay],4.neg),doneAction:2,levelScale:1/10);
 osc1=VBAP.ar(4,
 				LeakDC.ar(Osc.ar(~t.bufnum,pitch1,mul:amp1,phase:(sphere.x*phase).mod(2pi))),
 ~b.bufnum,
-Osc.ar(~t.bufnum,rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc2=VBAP.ar(4,
 				LeakDC.ar(Osc.ar(~t.bufnum,pitch2,mul:amp2,phase:(sphere.y*phase).mod(2pi))),
 ~b.bufnum,
-Osc.ar(~t.bufnum,rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 osc3=VBAP.ar(4,
 				LeakDC.ar(Osc.ar(~t.bufnum,pitch3,mul:amp3,phase:(sphere.z*phase).mod(2pi))),
 ~b.bufnum,
-Osc.ar(~t.bufnum,rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
-Osc.ar(~t.bufnum,rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
+Osc.ar(~t.bufnum,speed*rpr,phase:sphere.theta.linlin(pi.neg,pi,2pi.neg,2pi),mul:180),
+Osc.ar(~t.bufnum,speed*rpr,phase:sphere.phi.linlin((pi/2).neg,(pi/2),2pi.neg,2pi),mul:90)
 		);
 
 			wrappedOut1.value(out1,LeakDC.ar(LPF.ar(osc1,cutt_freq1),mul:env));
@@ -1009,7 +1009,7 @@ f=Pdef(\6, Pbind(\instrument, \ospace1,
 TempoClock.default.tempo_(1);
 /////with tempo 1 and time 1 overall duration of a is 2.08 min
 
-//s.record(numChannels:4);
+s.record(numChannels:4);
 	/////////////////////scales
 Scale.directory;
 
