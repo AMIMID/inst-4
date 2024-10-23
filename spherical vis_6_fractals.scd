@@ -78,18 +78,16 @@ pl3=pl3+1;
 	el3=(el3+(360-(360/1.6180339887499))).wrap(90.neg,90);
 
 	sph3=Spherical(1,az3.degrad*~h.[pl3],el3.degrad*~j.[pl3]);
-	//
-	 mag=Complex(sph3.x,sph3.x).rho.round(0.00001);////0 and 1st order only x,y,z
-	 mag_x=(Complex(cos((sph3.theta.round(0.00001)*m_x).wrap(pi.neg,pi)),cos((sph3.theta.round(0.00001)*m_x).wrap(pi.neg,pi))).rho*
-	 Complex(cos((sph3.phi.round(0.00001)).wrap((pi/2).neg,(pi/2))),cos((sph3.phi.round(0.00001)).wrap((pi/2).neg,(pi/2)))).rho)*sph3.rho;
+	 mag_x=(Complex(cos((sph3.theta.round(0.00001)*m_x).wrap(pi.neg,pi)),cos((sph3.theta.round(0.00001)*m_x).wrap(pi.neg,pi))).rho*Complex(cos((sph3.phi.round(0.00001)).wrap((pi/2).neg,(pi/2))),cos((sph3.phi.round(0.00001)).wrap((pi/2).neg,(pi/2)))).rho)*sph3.rho;
 
-////for between harmonics multiply sin(phi) after cos, when m is 2 then harm 3/2 is formed in oder 3, when m is 3 harm 4/3 is formed in oder 4 and when m is 3 for theta and 2 for phi harm 4/2 is formed for order4
+////for in-between harmonics multiply sin(phi) after cos, when m is 2 then harm 3/2 is formed in oder 3, when m is 3 harm 4/3 is formed in oder 4 and when m is 3 for theta and 2 for phi harm 4/2 is formed for order4//////same for y axis
+
 		// mag_x=(Complex(cos((sph3.theta.round(0.00001)*m_x).wrap(pi.neg,pi)),
 		// 	cos((sph3.theta.round(0.00001)*m_x).wrap(pi.neg,pi))).rho*
 		// 	Complex(sin((sph3.phi.round(0.00001)*(m_x-1)).wrap((pi/2).neg,(pi/2))),sin((sph3.phi.round(0.00001)*(m_x-1)).wrap((pi/
 		// 	2).neg,(pi/2)))).rho*
 		// Complex(cos((sph3.phi.round(0.00001)).wrap((pi/2).neg,(pi/2))),cos((sph3.phi.round(0.00001)).wrap((pi/2).neg,(pi/2)))).rho)*sph3.rho;
-		// ///x axis   ambi/// for order0 for sphere phi*0 else torus, same in y
+
 };
 
 ~magy = (360*100).collect{
@@ -104,8 +102,6 @@ pl4=pl4+1;
 		sin((sph4.theta.round(0.00001)*m_y).wrap(pi.neg,pi))).rho*
 		Complex(cos((sph4.phi.round(0.00001)).wrap((pi/2).neg,(pi/2))),cos((sph4.phi.round(0.00001)).wrap((pi/2).neg,(pi/
 		2)))).rho)*sph4.rho;
-/////y axis  ambi
-
 //		mag_y=(Complex(sin((sph4.theta.round(0.00001)*m_y).wrap(pi.neg,pi)),sin((sph4.theta.round(0.00001)*m_y).wrap(pi.neg,pi))).rho*
 //Complex(sin((sph4.phi.round(0.00001)*(m_y-1)).wrap((pi/2).neg,(pi/2))),sin((sph4.phi.round(0.00001)*(m_y-1)).wrap((pi/2).neg,(pi/2)))).rho*
 //Complex(cos((sph4.phi.round(0.00001)).wrap((pi/2).neg,(pi/2))),cos((sph4.phi.round(0.00001)).wrap((pi/2).neg,(pi/2)))).rho)*sph4.rho;
@@ -134,6 +130,7 @@ mag_z=Complex(sin((sph5.phi.round(0.00001)*m_z).wrap((pi/2).neg,(pi/2))),sin((sp
  );
 )
 
+/////////////////////////////////visualizer
 (
 var data;
 var az=0,el=0;
@@ -180,7 +177,7 @@ Slider(w, Rect(920, 10, 10, 450)).action_{|me|
 
 
 
-/////////////////////////////////choas
+/////////////////////////////////disorder
 
 (
 var data;
@@ -245,7 +242,7 @@ Slider(w, Rect(920, 10, 10, 450)).action_{|me|
 };
 )
 
-////////////////////////////////////////////animation
+//////////////////////////////////////////////////////////////////////animation
 
 (
 var data;
@@ -290,7 +287,7 @@ Pen.translate(400,400);
 { while { run } {~v.background_(Color.black); ~v.refresh; (1/1000).wait } }.fork(AppClock);
 
 )
-
+/////////////disorder
 
 (
 var data;
