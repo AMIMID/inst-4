@@ -30,8 +30,8 @@ SynthDef("help-phaseShift", { arg out=0;
 
 ////////////////buffers
 (
-~c1 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Desktop/00.wav",channels:0 );
-~c2 = Buffer.readChannel(s,"/Users/petrostatsiopoulos/Desktop/00.wav",channels:1 );
+~c1 = Buffer.readChannel(s,,channels:0 );
+~c2 = Buffer.readChannel(s,,channels:1 );
 ~c3 = Buffer.readChannel(s,,channels:0 );
 ~c4 = Buffer.readChannel(s,,channels:1 );
 ~c5 = Buffer.readChannel(s,,channels:0 );

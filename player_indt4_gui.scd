@@ -160,8 +160,8 @@ s.waitForBoot
 Buffer.freeAll
 
 (
-~c1 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/inst-4/piknotites6/SC_241022_083125.wav");
-~c2 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/inst-4/piknotites6/SC_241022_083125.wav");
+~c1 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/03_stereo_synth_pattern.wav");
+~c2 = Buffer.read(s,"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/03_stereo_synth_pattern.wav");
 )
 
 (
@@ -171,12 +171,12 @@ SynthDef.new(\inst4,
 		var sig1,sig2;
 
 sig1=FreeVerb.ar(BPF.ar
-			(PlayBuf.ar(4, ~c1.bufnum, BufRateScale.kr(~c1.bufnum), loop: 0, doneAction:0),
+			(PlayBuf.ar(2, ~c1.bufnum, BufRateScale.kr(~c1.bufnum), loop: 1, doneAction:2),
 				freq:pass1.lag(0.333),rq:width1.lag(0.333),mul:gain1.lag(0.333)),
 			mix:mix1.lag(0.333),room:1,mul:1/width1.sqrt);
 
 sig2=FreeVerb.ar(BPF.ar
-			(PlayBuf.ar(4, ~c2.bufnum, BufRateScale.kr(~c2.bufnum), loop: 0, doneAction:0),
+			(PlayBuf.ar(2, ~c2.bufnum, BufRateScale.kr(~c2.bufnum), loop: 1, doneAction:2),
 				freq:pass2.lag(0.333),rq:width2.lag(0.333),mul:gain2.lag(0.333)),
 			mix:mix2.lag(0.333),room:1,mul:1/width2.sqrt);
 
